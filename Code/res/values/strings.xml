@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Activity Main -->
     <string name="app_name">Niuxes</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="botao_pecas">Peças</string>
+    <string name="botao_jogar">Jogar</string>
+    <string name="botao_configuracoes">Configurações</string>
+    <string name="botao_sobre">Sobre</string>
+
+    <!-- Activity Sobre -->
+    <string name="title_activity_sobre">Sobre</string>
+
+    <!-- Activity Configurações -->
+    <string name="title_activity_configuracoes">ConfiguracoesActivity</string>
+    
+    <!-- Activity Peças -->
+    <string name="title_activity_pecas">Peças</string>
+    <string name="escolha_seus_guerreiros">Escolha seus guerreiros!</string>
+    <string name="nome_soldado">Soldado</string>
+    <string name="nome_mago">Mago</string>
+    <string name="nome_rei">Rei</string>
+    <string name="radio_esquerda">Esquerda</string>
+    <string name="radio_meio">Meio</string>
+    <string name="radio_direita">Direita</string>
 
 </resources>

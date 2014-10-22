@@ -4,9 +4,40 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <TextView
+    <Button
+        android:id="@+id/botaoPecas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/botao_pecas"
+        android:onClick="pecas" />
+
+    <Button
+        android:id="@+id/botaoJogar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/botaoPecas"
+        android:layout_centerHorizontal="true"
+        android:text="@string/botao_jogar"
+        android:onClick="jogar" />
+
+    <Button
+        android:id="@+id/botaoConfiguracoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/botaoPecas"
+        android:layout_centerHorizontal="true"
+        android:text="@string/botao_configuracoes"
+        android:onClick="configuracoes" />
+
+    <Button
+        android:id="@+id/botaoSobre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/botao_sobre"
+        android:onClick="sobre" />
 
 </RelativeLayout>
