@@ -20,6 +20,7 @@
     <string name="nome_soldado">Soldado</string>
     <string name="nome_mago">Mago</string>
     <string name="nome_rei">Rei</string>
+    <string name="nome_arqueiro">Arqueiro</string>
     <string name="radio_esquerda">Esquerda</string>
     <string name="radio_meio">Meio</string>
     <string name="radio_direita">Direita</string>

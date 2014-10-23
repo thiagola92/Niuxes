@@ -13,9 +13,23 @@
         android:gravity="center"
         android:text="@string/escolha_seus_guerreiros" />
 
+    <ImageView
+        android:id="@+id/separadorTopo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
+    
+<ScrollView
+    android:id="@+id/barraDeRolagem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:gravity="center" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,7 +44,7 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:id="@+id/imageSoldado"
+                    android:id="@+id/imagemSoldado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/peca_soldado_branco" />
@@ -51,7 +65,7 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:id="@+id/imageMago"
+                    android:id="@+id/imagemMago"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/peca_mago_branco" />
@@ -72,7 +86,7 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:id="@+id/imageRei"
+                    android:id="@+id/imagemRei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/peca_rei_branco" />
@@ -84,7 +98,42 @@
                     android:text="@string/nome_rei" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imagemArqueiro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/peca_arqueiro_branco" />
+
+                <TextView
+                    android:id="@+id/textoArqueiro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nome_arqueiro" />
+
+            </LinearLayout>
             
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/separador1"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
+
         </LinearLayout>
 
         <RadioGroup
@@ -114,7 +163,28 @@
                 android:layout_weight="1"
                 android:text="@string/radio_esquerda" />
 
+            <RadioButton
+                android:id="@+id/radioEsquerda4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/radio_esquerda" />
+
         </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/separador2"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
+
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/radioGrupoMeio"
@@ -143,7 +213,29 @@
                 android:layout_weight="1"
                 android:text="@string/radio_meio" />
 
+            <RadioButton
+                android:id="@+id/radioMeio4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/radio_meio" />
+            
+
         </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/separador3"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
+
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/radioGrupoDireita"
@@ -172,8 +264,17 @@
                 android:layout_weight="1"
                 android:text="@string/radio_direita" />
 
+            <RadioButton
+                android:id="@+id/radioDireita4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/radio_direita" />
+
         </RadioGroup>
 
     </LinearLayout>
+    
+    </ScrollView>
 
 </LinearLayout>
