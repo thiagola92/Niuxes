@@ -1,7 +1,5 @@
 package com.example.niuxes;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 

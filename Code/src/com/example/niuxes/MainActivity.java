@@ -3,12 +3,13 @@ package com.example.niuxes;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnMenuItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +19,8 @@ public class MainActivity extends Activity {
     
     public void jogar (View view) {
     	PopupMenu popup = new PopupMenu(this, view);
-    	MenuInflater menuInflater = popup.getMenuInflater();
-    	menuInflater.inflate(R.menu.menu_online_offline, popup.getMenu());
+    	popup.setOnMenuItemClickListener(this);
+    	popup.inflate(R.menu.menu_online_offline);
     	popup.show();
     }
     
@@ -38,8 +39,9 @@ public class MainActivity extends Activity {
     	startActivity(i);
     }
     
+    @Override
     public boolean onMenuItemClick(MenuItem item) {
-    	Intent i = new Intent(this, JogarActivity.class);
+    	Intent i = new Intent(this, JogoActivity.class);
     	switch(item.getItemId()) {
     	case R.id.menu_offline:
     		i.putExtra("online", false);
@@ -50,7 +52,7 @@ public class MainActivity extends Activity {
     		startActivity(i);
     	return true;
     	default:
-    	return true;
+    	return false;
     	}
     }
 }

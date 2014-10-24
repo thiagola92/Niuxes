@@ -13,10 +13,11 @@
 
     <!-- Activity Configurações -->
     <string name="title_activity_configuracoes">ConfiguracoesActivity</string>
-    
+
     <!-- Activity Peças -->
     <string name="title_activity_pecas">Peças</string>
     <string name="escolha_seus_guerreiros">Escolha seus guerreiros!</string>
+    <string name="salvar_pecas">Salvar peças</string>
     <string name="nome_soldado">Soldado</string>
     <string name="nome_mago">Mago</string>
     <string name="nome_rei">Rei</string>
@@ -24,5 +25,9 @@
     <string name="radio_esquerda">Esquerda</string>
     <string name="radio_meio">Meio</string>
     <string name="radio_direita">Direita</string>
+    
+    <!-- Activity Jogo -->
+    <string name="title_activity_jogo">Jogo</string>
+    <string name="novo_jogo">Novo jogo</string>
 
 </resources>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -16,6 +17,11 @@ public class PecasActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pecas);
+		
+		SharedPreferences preferencias = getSharedPreferences("pecas", Context.MODE_PRIVATE);
+		marcarEsquerda(preferencias.getInt("esquerda", 0));
+		marcarMeio(preferencias.getInt("meio", 0));
+		marcarDireita(preferencias.getInt("direita", 0));
 	}
 	
 	@Override
@@ -60,6 +66,9 @@ public class PecasActivity extends Activity {
 		radioId = R.id.radioEsquerda3;
 		if (radioId == pecaMarcada)
 			return 3;
+		radioId = R.id.radioEsquerda4;
+		if (radioId == pecaMarcada)
+			return 4;
 		
 		Toast.makeText(this, "Nenhuma peça escolhida para a esquerda", Toast.LENGTH_LONG).show();
 		return 0;
@@ -78,6 +87,9 @@ public class PecasActivity extends Activity {
 		radioId = R.id.radioMeio3;
 		if (radioId == pecaMarcada)
 			return 3;
+		radioId = R.id.radioMeio4;
+		if (radioId == pecaMarcada)
+			return 4;
 		
 		Toast.makeText(this, "Nenhuma peça escolhida para o meio", Toast.LENGTH_LONG).show();
 		return 0;
@@ -96,8 +108,111 @@ public class PecasActivity extends Activity {
 		radioId = R.id.radioDireita3;
 		if (radioId == pecaMarcada)
 			return 3;
+		radioId = R.id.radioDireita4;
+		if (radioId == pecaMarcada)
+			return 4;
 		
 		Toast.makeText(this, "Nenhuma peça escolhida para a direita", Toast.LENGTH_LONG).show();
 		return 0;
+	}
+
+	/*
+	 * Marcar as peças que você já tinha escolhido
+	 * Esquerda
+	 * Meio
+	 * Direita
+	 */
+	
+	private void marcarEsquerda(int numeroDaPeca) {
+		
+		RadioButton radioButton;
+		
+		switch(numeroDaPeca) {
+		case 0:
+			Toast.makeText(this, "Peça a esquerda = 0", Toast.LENGTH_LONG).show();
+		break;
+		case 1:
+			radioButton = (RadioButton)findViewById(R.id.radioEsquerda1);
+			radioButton.setChecked(true);
+		break;
+		case 2:
+			radioButton = (RadioButton)findViewById(R.id.radioEsquerda2);
+			radioButton.setChecked(true);
+		break;
+		case 3:
+			radioButton = (RadioButton)findViewById(R.id.radioEsquerda3);
+			radioButton.setChecked(true);
+		break;
+		case 4:
+			radioButton = (RadioButton)findViewById(R.id.radioEsquerda4);
+			radioButton.setChecked(true);
+		break;
+		default:
+			Toast.makeText(this, "Não foi encontrado peça a esquerda", Toast.LENGTH_LONG).show();
+		break;
+			
+		}
+	}
+	
+	private void marcarMeio(int numeroDaPeca) {
+		
+		RadioButton radioButton;
+		
+		switch(numeroDaPeca) {
+		case 0:
+			Toast.makeText(this, "Peça a meio = 0", Toast.LENGTH_LONG).show();
+		break;
+		case 1:
+			radioButton = (RadioButton)findViewById(R.id.radioMeio1);
+			radioButton.setChecked(true);
+		break;
+		case 2:
+			radioButton = (RadioButton)findViewById(R.id.radioMeio2);
+			radioButton.setChecked(true);
+		break;
+		case 3:
+			radioButton = (RadioButton)findViewById(R.id.radioMeio3);
+			radioButton.setChecked(true);
+		break;
+		case 4:
+			radioButton = (RadioButton)findViewById(R.id.radioMeio4);
+			radioButton.setChecked(true);
+		break;
+		default:
+			Toast.makeText(this, "Não foi encontrado peça no meio", Toast.LENGTH_LONG).show();
+		break;
+			
+		}
+	}
+	
+	private void marcarDireita(int numeroDaPeca) {
+		
+		RadioButton radioButton;
+		
+		switch(numeroDaPeca) {
+		case 0:
+			Toast.makeText(this, "Peça a esquerda = 0", Toast.LENGTH_LONG).show();
+		break;
+		case 1:
+			radioButton = (RadioButton)findViewById(R.id.radioDireita1);
+			radioButton.setChecked(true);
+		break;
+		case 2:
+			radioButton = (RadioButton)findViewById(R.id.radioDireita2);
+			radioButton.setChecked(true);
+		break;
+		case 3:
+			radioButton = (RadioButton)findViewById(R.id.radioDireita3);
+			radioButton.setChecked(true);
+		break;
+		case 4:
+			radioButton = (RadioButton)findViewById(R.id.radioDireita4);
+			radioButton.setChecked(true);
+		break;
+		default:
+			Toast.makeText(this, "Não foi encontrado peça a direita", Toast.LENGTH_LONG).show();
+		break;
+			
+		}
 	}
 }

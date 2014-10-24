@@ -34,6 +34,10 @@
             android:name=".PecasActivity"
             android:label="@string/title_activity_pecas" >
         </activity>
+        <activity
+            android:name=".JogoActivity"
+            android:label="@string/title_activity_jogo" >
+        </activity>
     </application>
 
 </manifest>
