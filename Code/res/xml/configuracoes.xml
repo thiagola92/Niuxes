@@ -3,8 +3,12 @@
     <CheckBoxPreference
         android:key="som"
         android:title="Som"
-        android:summary="Ativa ou desativa o som de mover a peça"
-        android:enabled="true"/>
+        android:summary="Ativa ou desativa o som de mover a peça"/>
+    
+    <CheckBoxPreference
+        android:key="daltonico"
+        android:title="Modo Daltonico"
+        android:summary="Troca algumas cores do aplicativo."/>
     
 
 </PreferenceScreen>

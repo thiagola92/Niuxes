@@ -31,37 +31,394 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/quadrado00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/quadrado10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+                
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/quadrado20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+                
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/quadrado30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+                
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/quadrado40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado43"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+                
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/quadrado50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado51"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado53"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+                
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/quadrado60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado61"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado62"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado63"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado64"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado65"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+
+                <ImageView
+                    android:id="@+id/quadrado66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/quadrado_vazio" />
+                
             </LinearLayout>
 
         </LinearLayout>

@@ -2,8 +2,11 @@ package com.example.niuxes;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+
+import com.example.game.Mapa;
 
 public class JogoActivity extends Activity {
 
