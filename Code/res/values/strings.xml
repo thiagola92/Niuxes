@@ -7,6 +7,8 @@
     <string name="botao_jogar">Jogar</string>
     <string name="botao_configuracoes">Configurações</string>
     <string name="botao_sobre">Sobre</string>
+    <string name="offline">Offline</string>
+    <string name="online">Online</string>
 
     <!-- Activity Sobre -->
     <string name="title_activity_sobre">Sobre</string>

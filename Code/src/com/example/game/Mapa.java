@@ -29,13 +29,13 @@ public class Mapa {
 	
 	public Mapa (int a, int b, int c,
 				int x, int y, int z) {
-
-		mapaPos[0][1] = x;
-		mapaPos[0][3] = y;
-		mapaPos[0][5] = z;
 		
 		mapaPos[6][1] = a;
 		mapaPos[6][3] = b;
 		mapaPos[6][5] = c;
+		
+		mapaPos[0][1] = x;
+		mapaPos[0][3] = y;
+		mapaPos[0][5] = z;
 	}
 }

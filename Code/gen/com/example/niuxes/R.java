@@ -1347,28 +1347,30 @@ containing a value of this type.
         public static final int botao_jogar=0x7f0b000f;
         public static final int botao_pecas=0x7f0b000e;
         public static final int botao_sobre=0x7f0b0011;
-        public static final int escolha_seus_guerreiros=0x7f0b0015;
-        public static final int nome_arqueiro=0x7f0b001a;
-        public static final int nome_mago=0x7f0b0018;
-        public static final int nome_rei=0x7f0b0019;
-        public static final int nome_soldado=0x7f0b0017;
-        public static final int novo_jogo=0x7f0b001f;
-        public static final int radio_direita=0x7f0b001d;
-        public static final int radio_esquerda=0x7f0b001b;
-        public static final int radio_meio=0x7f0b001c;
-        public static final int salvar_pecas=0x7f0b0016;
+        public static final int escolha_seus_guerreiros=0x7f0b0017;
+        public static final int nome_arqueiro=0x7f0b001c;
+        public static final int nome_mago=0x7f0b001a;
+        public static final int nome_rei=0x7f0b001b;
+        public static final int nome_soldado=0x7f0b0019;
+        public static final int novo_jogo=0x7f0b0021;
+        public static final int offline=0x7f0b0012;
+        public static final int online=0x7f0b0013;
+        public static final int radio_direita=0x7f0b001f;
+        public static final int radio_esquerda=0x7f0b001d;
+        public static final int radio_meio=0x7f0b001e;
+        public static final int salvar_pecas=0x7f0b0018;
         /**  Activity Configurações 
          */
-        public static final int title_activity_configuracoes=0x7f0b0013;
+        public static final int title_activity_configuracoes=0x7f0b0015;
         /**  Activity Jogo 
          */
-        public static final int title_activity_jogo=0x7f0b001e;
+        public static final int title_activity_jogo=0x7f0b0020;
         /**  Activity Peças 
          */
-        public static final int title_activity_pecas=0x7f0b0014;
+        public static final int title_activity_pecas=0x7f0b0016;
         /**  Activity Sobre 
          */
-        public static final int title_activity_sobre=0x7f0b0012;
+        public static final int title_activity_sobre=0x7f0b0014;
     }
     public static final class style {
         /** 

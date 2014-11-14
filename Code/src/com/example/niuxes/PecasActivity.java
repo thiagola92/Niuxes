@@ -70,7 +70,6 @@ public class PecasActivity extends Activity {
 		if (radioId == pecaMarcada)
 			return 4;
 		
-		Toast.makeText(this, "Nenhuma peça escolhida para a esquerda", Toast.LENGTH_LONG).show();
 		return 0;
 	}
 	
@@ -91,7 +90,6 @@ public class PecasActivity extends Activity {
 		if (radioId == pecaMarcada)
 			return 4;
 		
-		Toast.makeText(this, "Nenhuma peça escolhida para o meio", Toast.LENGTH_LONG).show();
 		return 0;
 	}
 	
@@ -112,7 +110,6 @@ public class PecasActivity extends Activity {
 		if (radioId == pecaMarcada)
 			return 4;
 		
-		Toast.makeText(this, "Nenhuma peça escolhida para a direita", Toast.LENGTH_LONG).show();
 		return 0;
 	}
 
@@ -128,9 +125,6 @@ public class PecasActivity extends Activity {
 		RadioButton radioButton;
 		
 		switch(numeroDaPeca) {
-		case 0:
-			Toast.makeText(this, "Peça a esquerda = 0", Toast.LENGTH_LONG).show();
-		break;
 		case 1:
 			radioButton = (RadioButton)findViewById(R.id.radioEsquerda1);
 			radioButton.setChecked(true);
@@ -148,7 +142,7 @@ public class PecasActivity extends Activity {
 			radioButton.setChecked(true);
 		break;
 		default:
-			Toast.makeText(this, "Não foi encontrado peça a esquerda", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Não foi encontrado peça a esquerda", Toast.LENGTH_SHORT).show();
 		break;
 			
 		}
@@ -159,9 +153,6 @@ public class PecasActivity extends Activity {
 		RadioButton radioButton;
 		
 		switch(numeroDaPeca) {
-		case 0:
-			Toast.makeText(this, "Peça a meio = 0", Toast.LENGTH_LONG).show();
-		break;
 		case 1:
 			radioButton = (RadioButton)findViewById(R.id.radioMeio1);
 			radioButton.setChecked(true);
@@ -179,7 +170,7 @@ public class PecasActivity extends Activity {
 			radioButton.setChecked(true);
 		break;
 		default:
-			Toast.makeText(this, "Não foi encontrado peça no meio", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Não foi encontrado peça no meio", Toast.LENGTH_SHORT).show();
 		break;
 			
 		}
@@ -190,9 +181,6 @@ public class PecasActivity extends Activity {
 		RadioButton radioButton;
 		
 		switch(numeroDaPeca) {
-		case 0:
-			Toast.makeText(this, "Peça a esquerda = 0", Toast.LENGTH_LONG).show();
-		break;
 		case 1:
 			radioButton = (RadioButton)findViewById(R.id.radioDireita1);
 			radioButton.setChecked(true);
@@ -210,7 +198,7 @@ public class PecasActivity extends Activity {
 			radioButton.setChecked(true);
 		break;
 		default:
-			Toast.makeText(this, "Não foi encontrado peça a direita", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Não foi encontrado peça a direita", Toast.LENGTH_SHORT).show();
 		break;
 			
 		}
