@@ -8,7 +8,7 @@ public class Mapa {
 	
 	int teste1;
 	int teste2;
-
+	
 	public int[][] mapaPos = {	{ 0, 0, 0, 0, 0, 0, 0, },
 								{ 0, 0, 0, 0, 0, 0, 0, },
 								{ 0, 0, 0, 0, 0, 0, 0, },
