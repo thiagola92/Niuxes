@@ -6,6 +6,8 @@ public class Mapa {
 	
 	final static int NUMERO_DE_PECAS = 4;
 	
+	int teste1;
+	
 	public int[][] mapaPos = {	{ 0, 0, 0, 0, 0, 0, 0, },
 								{ 0, 0, 0, 0, 0, 0, 0, },
 								{ 0, 0, 0, 0, 0, 0, 0, },
