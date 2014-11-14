@@ -6,11 +6,9 @@ public class Mapa {
 	
 	final static int NUMERO_DE_PECAS = 4;
 	
-<<<<<<< HEAD
 	int teste1;
 	int teste2;
 
->>>>>>> parent of 3c4b9c0... Teste do GitHub - Part 1
 	public int[][] mapaPos = {	{ 0, 0, 0, 0, 0, 0, 0, },
 								{ 0, 0, 0, 0, 0, 0, 0, },
 								{ 0, 0, 0, 0, 0, 0, 0, },
