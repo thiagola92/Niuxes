@@ -28,8 +28,75 @@
     <string name="radio_meio">Meio</string>
     <string name="radio_direita">Direita</string>
     
+    	<!-- Descrição -->
+    	
+    	<string name="soldado">Soldado</string>
+    	<string name="mago">Mago</string>
+    	<string name="rei">Rei</string>
+    	<string name="arqueiro">Arqueiro</string>
+    
     <!-- Activity Jogo -->
     <string name="title_activity_jogo">Jogo</string>
     <string name="novo_jogo">Novo jogo</string>
+    
+    	<!-- Descrição -->
+    	<string name="turno_seu">Seu turno</string>
+    	<string name="turno_oponente">Turno do oponente</string>
+    	
+    	<string name="quadrado00">1x1</string>
+    	<string name="quadrado01">1x2</string>
+    	<string name="quadrado02">1x3</string>
+    	<string name="quadrado03">1x4</string>
+    	<string name="quadrado04">1x5</string>
+    	<string name="quadrado05">1x6</string>
+    	<string name="quadrado06">1x7</string>
+    	
+    	<string name="quadrado10">2x1</string>
+    	<string name="quadrado11">2x2</string>
+    	<string name="quadrado12">2x3</string>
+    	<string name="quadrado13">2x4</string>
+    	<string name="quadrado14">2x5</string>
+    	<string name="quadrado15">2x6</string>
+    	<string name="quadrado16">2x7</string>
+    	
+    	<string name="quadrado20">3x1</string>
+    	<string name="quadrado21">3x2</string>
+    	<string name="quadrado22">3x3</string>
+    	<string name="quadrado23">3x4</string>
+    	<string name="quadrado24">3x5</string>
+    	<string name="quadrado25">3x6</string>
+    	<string name="quadrado26">3x7</string>
+    	
+    	<string name="quadrado30">4x1</string>
+    	<string name="quadrado31">4x2</string>
+    	<string name="quadrado32">4x3</string>
+    	<string name="quadrado33">4x4</string>
+    	<string name="quadrado34">4x5</string>
+    	<string name="quadrado35">4x6</string>
+    	<string name="quadrado36">4x7</string>
+    	
+    	<string name="quadrado40">5x1</string>
+    	<string name="quadrado41">5x2</string>
+    	<string name="quadrado42">5x3</string>
+    	<string name="quadrado43">5x4</string>
+    	<string name="quadrado44">5x5</string>
+    	<string name="quadrado45">5x6</string>
+    	<string name="quadrado46">5x7</string>
+    	
+    	<string name="quadrado50">6x1</string>
+    	<string name="quadrado51">6x2</string>
+    	<string name="quadrado52">6x3</string>
+    	<string name="quadrado53">6x4</string>
+    	<string name="quadrado54">6x5</string>
+    	<string name="quadrado55">6x6</string>
+    	<string name="quadrado56">6x7</string>
+    	
+    	<string name="quadrado60">7x1</string>
+    	<string name="quadrado61">7x2</string>
+    	<string name="quadrado62">7x3</string>
+    	<string name="quadrado63">7x4</string>
+    	<string name="quadrado64">7x5</string>
+    	<string name="quadrado65">7x6</string>
+    	<string name="quadrado66">7x7</string>
 
 </resources>

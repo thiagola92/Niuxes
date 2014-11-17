@@ -14,7 +14,8 @@
             android:id="@+id/turno_vez"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/jogo_turno_2" />
+            android:src="@drawable/jogo_turno_2"
+            android:contentDescription="@string/turno_oponente" />
 
     </LinearLayout>
 
@@ -39,49 +40,70 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado00"
+                    android:clickable="true"
+                    android:onClick="selecionar00" />
 
                 <ImageView
                     android:id="@+id/quadrado01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado01"
+                    android:clickable="true"
+                    android:onClick="selecionar01" />
 
                 <ImageView
                     android:id="@+id/quadrado02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado02"
+                    android:clickable="true"
+                    android:onClick="selecionar02" />
 
                 <ImageView
                     android:id="@+id/quadrado03"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado03"
+                    android:clickable="true"
+                    android:onClick="selecionar03" />
 
                 <ImageView
                     android:id="@+id/quadrado04"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado04"
+                    android:clickable="true"
+                    android:onClick="selecionar04" />
 
                 <ImageView
                     android:id="@+id/quadrado05"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado05"
+                    android:clickable="true"
+                    android:onClick="selecionar05" />
 
                 <ImageView
                     android:id="@+id/quadrado06"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado06"
+                    android:clickable="true"
+                    android:onClick="selecionar06" />
 
             </LinearLayout>
 
@@ -95,49 +117,70 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado10"
+                    android:clickable="true"
+                    android:onClick="selecionar10" />
 
                 <ImageView
                     android:id="@+id/quadrado11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado11"
+                    android:clickable="true"
+                    android:onClick="selecionar11" />
 
                 <ImageView
                     android:id="@+id/quadrado12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado12"
+                    android:clickable="true"
+                    android:onClick="selecionar12" />
 
                 <ImageView
                     android:id="@+id/quadrado13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado13"
+                    android:clickable="true"
+                    android:onClick="selecionar13" />
 
                 <ImageView
                     android:id="@+id/quadrado14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado14"
+                    android:clickable="true"
+                    android:onClick="selecionar14" />
 
                 <ImageView
                     android:id="@+id/quadrado15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado15"
+                    android:clickable="true"
+                    android:onClick="selecionar15" />
 
                 <ImageView
                     android:id="@+id/quadrado16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado16"
+                    android:clickable="true"
+                    android:onClick="selecionar16" />
                 
             </LinearLayout>
 
@@ -151,49 +194,70 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado20"
+                    android:clickable="true"
+                    android:onClick="selecionar20" />
 
                 <ImageView
                     android:id="@+id/quadrado21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado21"
+                    android:clickable="true"
+                    android:onClick="selecionar21" />
 
                 <ImageView
                     android:id="@+id/quadrado22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado22"
+                    android:clickable="true"
+                    android:onClick="selecionar22" />
 
                 <ImageView
                     android:id="@+id/quadrado23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado23"
+                    android:clickable="true"
+                    android:onClick="selecionar23" />
 
                 <ImageView
                     android:id="@+id/quadrado24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado24"
+                    android:clickable="true"
+                    android:onClick="selecionar24" />
 
                 <ImageView
                     android:id="@+id/quadrado25"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado25"
+                    android:clickable="true"
+                    android:onClick="selecionar25" />
 
                 <ImageView
                     android:id="@+id/quadrado26"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado26"
+                    android:clickable="true"
+                    android:onClick="selecionar26" />
                 
             </LinearLayout>
 
@@ -207,49 +271,70 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado30"
+                    android:clickable="true"
+                    android:onClick="selecionar30" />
 
                 <ImageView
                     android:id="@+id/quadrado31"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado31"
+                    android:clickable="true"
+                    android:onClick="selecionar31" />
 
                 <ImageView
                     android:id="@+id/quadrado32"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado32"
+                    android:clickable="true"
+                    android:onClick="selecionar32" />
 
                 <ImageView
                     android:id="@+id/quadrado33"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado33"
+                    android:clickable="true"
+                    android:onClick="selecionar33" />
 
                 <ImageView
                     android:id="@+id/quadrado34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado34"
+                    android:clickable="true"
+                    android:onClick="selecionar34" />
 
                 <ImageView
                     android:id="@+id/quadrado35"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado35"
+                    android:clickable="true"
+                    android:onClick="selecionar35" />
 
                 <ImageView
                     android:id="@+id/quadrado36"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado36"
+                    android:clickable="true"
+                    android:onClick="selecionar36" />
                 
             </LinearLayout>
 
@@ -263,49 +348,70 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado40"
+                    android:clickable="true"
+                    android:onClick="selecionar40" />
 
                 <ImageView
                     android:id="@+id/quadrado41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado41"
+                    android:clickable="true"
+                    android:onClick="selecionar41" />
 
                 <ImageView
                     android:id="@+id/quadrado42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado42"
+                    android:clickable="true"
+                    android:onClick="selecionar42" />
 
                 <ImageView
                     android:id="@+id/quadrado43"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado43"
+                    android:clickable="true"
+                    android:onClick="selecionar43" />
 
                 <ImageView
                     android:id="@+id/quadrado44"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado44"
+                    android:clickable="true"
+                    android:onClick="selecionar44" />
 
                 <ImageView
                     android:id="@+id/quadrado45"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado45"
+                    android:clickable="true"
+                    android:onClick="selecionar45" />
 
                 <ImageView
                     android:id="@+id/quadrado46"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado46"
+                    android:clickable="true"
+                    android:onClick="selecionar46" />
                 
             </LinearLayout>
 
@@ -319,49 +425,70 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado50"
+                    android:clickable="true"
+                    android:onClick="selecionar50" />
 
                 <ImageView
                     android:id="@+id/quadrado51"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado51"
+                    android:clickable="true"
+                    android:onClick="selecionar51" />
 
                 <ImageView
                     android:id="@+id/quadrado52"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado52"
+                    android:clickable="true"
+                    android:onClick="selecionar52" />
 
                 <ImageView
                     android:id="@+id/quadrado53"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado53"
+                    android:clickable="true"
+                    android:onClick="selecionar53" />
 
                 <ImageView
                     android:id="@+id/quadrado54"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado54"
+                    android:clickable="true"
+                    android:onClick="selecionar54" />
 
                 <ImageView
                     android:id="@+id/quadrado55"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado55"
+                    android:clickable="true"
+                    android:onClick="selecionar55" />
 
                 <ImageView
                     android:id="@+id/quadrado56"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado56"
+                    android:clickable="true"
+                    android:onClick="selecionar56" />
                 
             </LinearLayout>
 
@@ -375,49 +502,70 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado60"
+                    android:clickable="true"
+                    android:onClick="selecionar60" />
 
                 <ImageView
                     android:id="@+id/quadrado61"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado61"
+                    android:clickable="true"
+                    android:onClick="selecionar61" />
 
                 <ImageView
                     android:id="@+id/quadrado62"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado62"
+                    android:clickable="true"
+                    android:onClick="selecionar62" />
 
                 <ImageView
                     android:id="@+id/quadrado63"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado63"
+                    android:clickable="true"
+                    android:onClick="selecionar63" />
 
                 <ImageView
                     android:id="@+id/quadrado64"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado64"
+                    android:clickable="true"
+                    android:onClick="selecionar64" />
 
                 <ImageView
                     android:id="@+id/quadrado65"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado65"
+                    android:clickable="true"
+                    android:onClick="selecionar65" />
 
                 <ImageView
                     android:id="@+id/quadrado66"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/quadrado_vazio" />
+                    android:src="@drawable/quadrado_vazio"
+                    android:contentDescription="@string/quadrado66"
+                    android:clickable="true"
+                    android:onClick="selecionar66" />
                 
             </LinearLayout>
 

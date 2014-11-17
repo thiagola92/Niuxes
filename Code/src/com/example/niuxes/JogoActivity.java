@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.game.Mapa;
@@ -14,6 +15,16 @@ import com.example.game.Mapa;
 public class JogoActivity extends Activity {
 	
 	static public Mapa tabuleiro;
+	
+	// quadrado selecionado
+	public int quadrado1X;
+	public int quadrado1Y;
+	
+	// quadrado ao qual esta se movimentando
+	public int quadrado2X;
+	public int quadrado2Y;
+	
+	public boolean pecaSelecionada = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +69,6 @@ public class JogoActivity extends Activity {
 		
 	}
 	
-	public void onDestroy() {
-		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = estadoDoJogo.edit();
-		
-		editor.putBoolean("emJogo", false);
-		editor.commit();
-		
-		super.onDestroy();
-	}
-	
 	public void onBackPressed() {
 		
 		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
@@ -95,8 +96,6 @@ public class JogoActivity extends Activity {
 		
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
 	
 	public void carregarMapa() {
 
@@ -229,5 +228,244 @@ public class JogoActivity extends Activity {
 		}
 		
 		return R.drawable.quadrado_vazio;
+	}
+
+	public void soldadoMovimentos() {
+		
+	}
+	
+	public void magoMovimentos() {
+		
+	}
+	
+	public void reiMovimentos() {
+		
+	}
+	
+	public void arqueiroMovimentos() {
+		
+	}
+	
+	/*
+	 * Essa parte vai exigir um pouco de explicação.
+	 * Em pensei em duas maneiras de descobrir em qual lugar do tabuleiro o usuário esta tocando.
+	 * 
+	 * 1) Ele tocar em qualquer lugar da tela, chamar uma função que vai varrer todos os quadrados do tabuleiro até descobrir a peça tocada.
+	 * 		Ex:
+	 * public void descobrirPos (View view)
+	 * 		if (view.getId() == R.id.quadrado00) {
+	 * 			...
+	 * 		} else if (view.getId() == R.id.quadrado01) {
+	 * 			...
+	 * 		} ...
+	 * 
+	 * Nesse caso teria 49 "if" seguidos, o que faria cada vez que você selecionar uma peça ter a chance de demorar dependendo de onde ela esteja.
+	 * 
+	 * 2) Cada quadrado chamar uma função espefica pra ele, embora aumente o tamanho do codigo aqui, torna o jogo mais rapido para o usuário.
+	 * 		Ex:
+	 * public void selecionar00 (View view) {
+	 * 	...
+	 * }
+	 * public void selecionar01 (View view) {
+	 * 	...
+	 * }
+	 * ...
+	 */
+
+	public void selecionar00(View view) {
+		
+		
+	}
+	
+	public void selecionar01(View view) {
+		
+	}
+	
+	public void selecionar02(View view) {
+		
+	}
+	
+	public void selecionar03(View view) {
+		
+	}
+	
+	public void selecionar04(View view) {
+		
+	}
+	
+	public void selecionar05(View view) {
+		
+	}
+	
+	public void selecionar06(View view) {
+		
+	}
+
+	public void selecionar10(View view) {
+		
+	}
+	
+	public void selecionar11(View view) {
+		
+	}
+	
+	public void selecionar12(View view) {
+		
+	}
+	
+	public void selecionar13(View view) {
+		
+	}
+	
+	public void selecionar14(View view) {
+		
+	}
+	
+	public void selecionar15(View view) {
+		
+	}
+	
+	public void selecionar16(View view) {
+		
+	}
+
+	public void selecionar20(View view) {
+		
+	}
+	
+	public void selecionar21(View view) {
+		
+	}
+	
+	public void selecionar22(View view) {
+		
+	}
+	
+	public void selecionar23(View view) {
+		
+	}
+	
+	public void selecionar24(View view) {
+		
+	}
+	
+	public void selecionar25(View view) {
+		
+	}
+	
+	public void selecionar26(View view) {
+		
+	}
+
+	public void selecionar30(View view) {
+		
+	}
+	
+	public void selecionar31(View view) {
+		
+	}
+	
+	public void selecionar32(View view) {
+		
+	}
+	
+	public void selecionar33(View view) {
+		
+	}
+	
+	public void selecionar34(View view) {
+		
+	}
+	
+	public void selecionar35(View view) {
+		
+	}
+	
+	public void selecionar36(View view) {
+		
+	}
+
+	public void selecionar40(View view) {
+		
+	}
+	
+	public void selecionar41(View view) {
+		
+	}
+	
+	public void selecionar42(View view) {
+		
+	}
+	
+	public void selecionar43(View view) {
+		
+	}
+	
+	public void selecionar44(View view) {
+		
+	}
+	
+	public void selecionar45(View view) {
+		
+	}
+	
+	public void selecionar46(View view) {
+		
+	}
+
+	public void selecionar50(View view) {
+		
+	}
+	
+	public void selecionar51(View view) {
+		
+	}
+	
+	public void selecionar52(View view) {
+		
+	}
+	
+	public void selecionar53(View view) {
+		
+	}
+	
+	public void selecionar54(View view) {
+		
+	}
+	
+	public void selecionar55(View view) {
+		
+	}
+	
+	public void selecionar56(View view) {
+		
+	}
+
+	public void selecionar60(View view) {
+		
+	}
+	
+	public void selecionar61(View view) {
+		
+	}
+	
+	public void selecionar62(View view) {
+		
+	}
+	
+	public void selecionar63(View view) {
+		
+	}
+	
+	public void selecionar64(View view) {
+		
+	}
+	
+	public void selecionar65(View view) {
+		
+	}
+	
+	public void selecionar66(View view) {
+		
 	}
 }

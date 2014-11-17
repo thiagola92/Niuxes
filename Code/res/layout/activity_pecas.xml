@@ -28,7 +28,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center" >
 
         <LinearLayout
@@ -47,7 +47,8 @@
                     android:id="@+id/imagemSoldado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/peca_soldado_branco" />
+                    android:src="@drawable/peca_soldado_branco"
+                    android:contentDescription="@string/soldado" />
 
                 <TextView
                     android:id="@+id/textoSoldado"
@@ -68,7 +69,8 @@
                     android:id="@+id/imagemMago"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/peca_mago_branco" />
+                    android:src="@drawable/peca_mago_branco"
+                    android:contentDescription="@string/mago" />
 
                 <TextView
                     android:id="@+id/textoMago"
@@ -89,7 +91,8 @@
                     android:id="@+id/imagemRei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/peca_rei_branco" />
+                    android:src="@drawable/peca_rei_branco"
+                    android:contentDescription="@string/rei" />
 
                 <TextView
                     android:id="@+id/textoRei"
@@ -110,7 +113,8 @@
                     android:id="@+id/imagemArqueiro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/peca_arqueiro_branco" />
+                    android:src="@drawable/peca_arqueiro_branco"
+                    android:contentDescription="@string/arqueiro" />
 
                 <TextView
                     android:id="@+id/textoArqueiro"

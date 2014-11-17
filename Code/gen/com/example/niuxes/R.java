@@ -1343,34 +1343,93 @@ containing a value of this type.
         /**  Activity Main 
          */
         public static final int app_name=0x7f0b000d;
+        public static final int arqueiro=0x7f0b0023;
         public static final int botao_configuracoes=0x7f0b0010;
         public static final int botao_jogar=0x7f0b000f;
         public static final int botao_pecas=0x7f0b000e;
         public static final int botao_sobre=0x7f0b0011;
         public static final int escolha_seus_guerreiros=0x7f0b0017;
+        public static final int mago=0x7f0b0021;
         public static final int nome_arqueiro=0x7f0b001c;
         public static final int nome_mago=0x7f0b001a;
         public static final int nome_rei=0x7f0b001b;
         public static final int nome_soldado=0x7f0b0019;
-        public static final int novo_jogo=0x7f0b0021;
+        public static final int novo_jogo=0x7f0b0025;
         public static final int offline=0x7f0b0012;
         public static final int online=0x7f0b0013;
+        public static final int quadrado00=0x7f0b0028;
+        public static final int quadrado01=0x7f0b0029;
+        public static final int quadrado02=0x7f0b002a;
+        public static final int quadrado03=0x7f0b002b;
+        public static final int quadrado04=0x7f0b002c;
+        public static final int quadrado05=0x7f0b002d;
+        public static final int quadrado06=0x7f0b002e;
+        public static final int quadrado10=0x7f0b002f;
+        public static final int quadrado11=0x7f0b0030;
+        public static final int quadrado12=0x7f0b0031;
+        public static final int quadrado13=0x7f0b0032;
+        public static final int quadrado14=0x7f0b0033;
+        public static final int quadrado15=0x7f0b0034;
+        public static final int quadrado16=0x7f0b0035;
+        public static final int quadrado20=0x7f0b0036;
+        public static final int quadrado21=0x7f0b0037;
+        public static final int quadrado22=0x7f0b0038;
+        public static final int quadrado23=0x7f0b0039;
+        public static final int quadrado24=0x7f0b003a;
+        public static final int quadrado25=0x7f0b003b;
+        public static final int quadrado26=0x7f0b003c;
+        public static final int quadrado30=0x7f0b003d;
+        public static final int quadrado31=0x7f0b003e;
+        public static final int quadrado32=0x7f0b003f;
+        public static final int quadrado33=0x7f0b0040;
+        public static final int quadrado34=0x7f0b0041;
+        public static final int quadrado35=0x7f0b0042;
+        public static final int quadrado36=0x7f0b0043;
+        public static final int quadrado40=0x7f0b0044;
+        public static final int quadrado41=0x7f0b0045;
+        public static final int quadrado42=0x7f0b0046;
+        public static final int quadrado43=0x7f0b0047;
+        public static final int quadrado44=0x7f0b0048;
+        public static final int quadrado45=0x7f0b0049;
+        public static final int quadrado46=0x7f0b004a;
+        public static final int quadrado50=0x7f0b004b;
+        public static final int quadrado51=0x7f0b004c;
+        public static final int quadrado52=0x7f0b004d;
+        public static final int quadrado53=0x7f0b004e;
+        public static final int quadrado54=0x7f0b004f;
+        public static final int quadrado55=0x7f0b0050;
+        public static final int quadrado56=0x7f0b0051;
+        public static final int quadrado60=0x7f0b0052;
+        public static final int quadrado61=0x7f0b0053;
+        public static final int quadrado62=0x7f0b0054;
+        public static final int quadrado63=0x7f0b0055;
+        public static final int quadrado64=0x7f0b0056;
+        public static final int quadrado65=0x7f0b0057;
+        public static final int quadrado66=0x7f0b0058;
         public static final int radio_direita=0x7f0b001f;
         public static final int radio_esquerda=0x7f0b001d;
         public static final int radio_meio=0x7f0b001e;
+        public static final int rei=0x7f0b0022;
         public static final int salvar_pecas=0x7f0b0018;
+        /**  Descrição 
+         */
+        public static final int soldado=0x7f0b0020;
         /**  Activity Configurações 
          */
         public static final int title_activity_configuracoes=0x7f0b0015;
         /**  Activity Jogo 
          */
-        public static final int title_activity_jogo=0x7f0b0020;
+        public static final int title_activity_jogo=0x7f0b0024;
         /**  Activity Peças 
          */
         public static final int title_activity_pecas=0x7f0b0016;
         /**  Activity Sobre 
          */
         public static final int title_activity_sobre=0x7f0b0014;
+        public static final int turno_oponente=0x7f0b0027;
+        /**  Descrição 
+         */
+        public static final int turno_seu=0x7f0b0026;
     }
     public static final class style {
         /** 
