@@ -48,14 +48,35 @@ public class JogoActivity extends Activity {
 				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
 										pecas.getInt("meio", 2),
 										pecas.getInt("direita", 3),
-										1,
-										1,
-										1);
+										-1,
+										-1,
+										-1);
 			}
 		}
 		
 		carregarMapa();
 		
+	}
+	
+	public void onDestroy() {
+		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = estadoDoJogo.edit();
+		
+		editor.putBoolean("emJogo", false);
+		editor.commit();
+		
+		super.onDestroy();
+	}
+	
+	public void onBackPressed() {
+		
+		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = estadoDoJogo.edit();
+
+		editor.putBoolean("emJogo", false);
+		editor.commit();
+		
+		super.onBackPressed();
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,21 +88,15 @@ public class JogoActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
-		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = estadoDoJogo.edit();
-		
 		if (item.getItemId() == R.id.novoJogo) {
-			editor.putBoolean("emJogo", false);
-			editor.commit();
-			
-			// VOCE TEM CERTEZA Q DESEJA INICIAR UM NOVO JOGO? VC IRA PERDER TUDO
-			
-			super.onBackPressed();
+			onBackPressed();
     		return true;
 		}
 		
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
 	
 	public void carregarMapa() {
 

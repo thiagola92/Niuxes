@@ -16,6 +16,13 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = estadoDoJogo.edit();
+
+		editor.putBoolean("emJogo", false);
+		editor.commit();
+        
     }
     
     public void jogar (View view) {
