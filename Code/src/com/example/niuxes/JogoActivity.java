@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.game.Mapa;
 
@@ -24,6 +25,7 @@ public class JogoActivity extends Activity {
 	public int quadrado2X;
 	public int quadrado2Y;
 	
+	// caso o jogador já tenha selecionado uma peça
 	public boolean pecaSelecionada = false;
 
 	@Override
@@ -69,6 +71,7 @@ public class JogoActivity extends Activity {
 		
 	}
 	
+	@Override
 	public void onBackPressed() {
 		
 		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
@@ -80,6 +83,7 @@ public class JogoActivity extends Activity {
 		super.onBackPressed();
 	}
 	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater menuInflater = getMenuInflater();
 		menuInflater.inflate(R.menu.menu_jogo, menu);
@@ -205,6 +209,10 @@ public class JogoActivity extends Activity {
 		x.setImageResource(acharImagem(tabuleiro.mapaPos[6][6]));
 	}
 
+	/*
+	 * Passe o valor no tabuleiro e vai devolver qual imagem deve ser desenhada lá.
+	 */
+	
 	public int acharImagem(int x) {
 		
 		if(x>0) {
@@ -230,19 +238,491 @@ public class JogoActivity extends Activity {
 		return R.drawable.quadrado_vazio;
 	}
 
+	/*
+	 * Passe a posição do mapa e vai retornar o id daquela posição.
+	 */
+	
+	public int acharId(int x, int y) {
+		
+		if (x==0 && y==0)
+			return R.id.quadrado00;
+		if (x==0 && y==1)
+			return R.id.quadrado01;
+		if (x==0 && y==2)
+			return R.id.quadrado02;
+		if (x==0 && y==3)
+			return R.id.quadrado03;
+		if (x==0 && y==4)
+			return R.id.quadrado04;
+		if (x==0 && y==5)
+			return R.id.quadrado05;
+		if (x==0 && y==6)
+			return R.id.quadrado06;
+		
+		if (x==1 && y==0)
+			return R.id.quadrado10;
+		if (x==1 && y==1)
+			return R.id.quadrado11;
+		if (x==1 && y==2)
+			return R.id.quadrado12;
+		if (x==1 && y==3)
+			return R.id.quadrado13;
+		if (x==1 && y==4)
+			return R.id.quadrado14;
+		if (x==1 && y==5)
+			return R.id.quadrado15;
+		if (x==1 && y==6)
+			return R.id.quadrado16;
+		
+		if (x==2 && y==0)
+			return R.id.quadrado20;
+		if (x==2 && y==1)
+			return R.id.quadrado21;
+		if (x==2 && y==2)
+			return R.id.quadrado22;
+		if (x==2 && y==3)
+			return R.id.quadrado23;
+		if (x==2 && y==4)
+			return R.id.quadrado24;
+		if (x==2 && y==5)
+			return R.id.quadrado25;
+		if (x==2 && y==6)
+			return R.id.quadrado26;
+		
+		if (x==3 && y==0)
+			return R.id.quadrado30;
+		if (x==3 && y==1)
+			return R.id.quadrado31;
+		if (x==3 && y==2)
+			return R.id.quadrado32;
+		if (x==3 && y==3)
+			return R.id.quadrado33;
+		if (x==3 && y==4)
+			return R.id.quadrado34;
+		if (x==3 && y==5)
+			return R.id.quadrado35;
+		if (x==3 && y==6)
+			return R.id.quadrado36;
+		
+		if (x==4 && y==0)
+			return R.id.quadrado40;
+		if (x==4 && y==1)
+			return R.id.quadrado41;
+		if (x==4 && y==2)
+			return R.id.quadrado42;
+		if (x==4 && y==3)
+			return R.id.quadrado43;
+		if (x==4 && y==4)
+			return R.id.quadrado44;
+		if (x==4 && y==5)
+			return R.id.quadrado45;
+		if (x==4 && y==6)
+			return R.id.quadrado46;
+		
+		if (x==5 && y==0)
+			return R.id.quadrado50;
+		if (x==5 && y==1)
+			return R.id.quadrado51;
+		if (x==5 && y==2)
+			return R.id.quadrado52;
+		if (x==5 && y==3)
+			return R.id.quadrado53;
+		if (x==5 && y==4)
+			return R.id.quadrado54;
+		if (x==5 && y==5)
+			return R.id.quadrado55;
+		if (x==5 && y==6)
+			return R.id.quadrado56;
+		
+		if (x==6 && y==0)
+			return R.id.quadrado60;
+		if (x==6 && y==1)
+			return R.id.quadrado61;
+		if (x==6 && y==2)
+			return R.id.quadrado62;
+		if (x==6 && y==3)
+			return R.id.quadrado63;
+		if (x==6 && y==4)
+			return R.id.quadrado64;
+		if (x==6 && y==5)
+			return R.id.quadrado65;
+		if (x==6 && y==6)
+			return R.id.quadrado66;
+		
+		return -1;
+	}
+	
+	/*
+	 * Descobri qual peça que esta fazendo o movimento.
+	 * Chamar a função com os movimentos da peça.
+	 */
+	
+	public void descobrirMovimento() {
+		
+		if(tabuleiro.mapaPos[quadrado1X][quadrado1Y] == 1)
+			soldadoMovimentos();
+		else if (tabuleiro.mapaPos[quadrado1X][quadrado1Y] == 2)
+			magoMovimentos();
+		else if (tabuleiro.mapaPos[quadrado1X][quadrado1Y] == 3)
+			reiMovimentos();
+		else if (tabuleiro.mapaPos[quadrado1X][quadrado1Y] == 4)
+			arqueiroMovimentos();
+	}
+	
+	/*
+	 * Essa parte talvez seja muito complicada.
+	 * 
+	 * Se os movimentos da peça já tiverem aparecendo, desaparece.
+	 * Se não, aparece.
+	 * Aqui é onde você deve organizar os movimentos dos personagens.
+	 * 
+	 */
+	
 	public void soldadoMovimentos() {
+		
+		ImageView imagem;
+
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+
+		if ( (quadrado1X+2<=6) && (quadrado1X+2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+2,quadrado1Y));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+2][quadrado1Y]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-2<=6) && (quadrado1X-2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-2,quadrado1Y));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-2][quadrado1Y]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+
+		if ( (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+
+		if ( (quadrado1Y+2<=6) && (quadrado1Y+2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X,quadrado1Y+2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y+2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1Y-2<=6) && (quadrado1Y-2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X,quadrado1Y-2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y-2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
 		
 	}
 	
 	public void magoMovimentos() {
 		
+		ImageView imagem;
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) && (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-2<=6) && (quadrado1X-2>=0) && (quadrado1Y-2<=6) && (quadrado1Y-2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-2,quadrado1Y-2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-2][quadrado1Y-2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-3<=6) && (quadrado1X-3>=0) && (quadrado1Y-3<=6) && (quadrado1Y-3>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-3,quadrado1Y-3));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-3][quadrado1Y-3]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) && (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-2<=6) && (quadrado1X-2>=0) && (quadrado1Y+2<=6) && (quadrado1Y+2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-2,quadrado1Y+2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-2][quadrado1Y+2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-3<=6) && (quadrado1X-3>=0) && (quadrado1Y+3<=6) && (quadrado1Y+3>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-3,quadrado1Y+3));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-3][quadrado1Y+3]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) && (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+2<=6) && (quadrado1X+2>=0) && (quadrado1Y-2<=6) && (quadrado1Y-2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+2,quadrado1Y-2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+2][quadrado1Y-2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+3<=6) && (quadrado1X+3>=0) && (quadrado1Y-3<=6) && (quadrado1Y-3>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+3,quadrado1Y-3));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+3][quadrado1Y-3]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) && (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+2<=6) && (quadrado1X+2>=0) && (quadrado1Y+2<=6) && (quadrado1Y+2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+2,quadrado1Y+2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+2][quadrado1Y+2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+3<=6) && (quadrado1X+3>=0) && (quadrado1Y+3<=6) && (quadrado1Y+3>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+3,quadrado1Y+3));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+3][quadrado1Y+3]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
 	}
 	
 	public void reiMovimentos() {
 		
+		ImageView imagem;
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) && (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) && (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) && (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) && (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
 	}
 	
 	public void arqueiroMovimentos() {
+		
+		ImageView imagem;
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) && (quadrado1Y-2<=6) && (quadrado1Y-2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y-2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y-2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-2<=6) && (quadrado1X-2>=0) && (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-2,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-2][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-1<=6) && (quadrado1X-1>=0) && (quadrado1Y+2<=6) && (quadrado1Y+2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-1,quadrado1Y+2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-1][quadrado1Y+2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X-2<=6) && (quadrado1X-2>=0) && (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X-2,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X-2][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) && (quadrado1Y-2<=6) && (quadrado1Y-2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y-2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y-2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+2<=6) && (quadrado1X+2>=0) && (quadrado1Y-1<=6) && (quadrado1Y-1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+2,quadrado1Y-1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+2][quadrado1Y-1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+1<=6) && (quadrado1X+1>=0) && (quadrado1Y+2<=6) && (quadrado1Y+2>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+1,quadrado1Y+2));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+1][quadrado1Y+2]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
+		
+		if ( (quadrado1X+2<=6) && (quadrado1X+2>=0) && (quadrado1Y+1<=6) && (quadrado1Y+1>=0) ) {
+			imagem = (ImageView)findViewById(acharId(quadrado1X+2,quadrado1Y+1));
+			if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+				imagem.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X+2][quadrado1Y+1]));
+			} else {
+				imagem.setImageResource(R.drawable.quadrado_ir);
+			}
+		}
 		
 	}
 	
@@ -274,198 +754,1520 @@ public class JogoActivity extends Activity {
 
 	public void selecionar00(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado00);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[0][0] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=0;
+			quadrado1Y=0;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==0 && quadrado1Y==0) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=0;
+			quadrado2Y=0;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar01(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado01);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[0][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=0;
+			quadrado1Y=1;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==0 && quadrado1Y==1) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=0;
+			quadrado2Y=1;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar02(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado02);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[0][2] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=0;
+			quadrado1Y=2;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==0 && quadrado1Y==2) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=0;
+			quadrado2Y=2;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar03(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado03);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[0][3] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=0;
+			quadrado1Y=3;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==0 && quadrado1Y==3) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=0;
+			quadrado2Y=3;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar04(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado04);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[0][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=0;
+			quadrado1Y=4;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==0 && quadrado1Y==4) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=0;
+			quadrado2Y=4;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar05(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado05);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[0][5] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=0;
+			quadrado1Y=5;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==0 && quadrado1Y==5) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=0;
+			quadrado2Y=5;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar06(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado06);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[0][6] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=0;
+			quadrado1Y=6;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==0 && quadrado1Y==6) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=0;
+			quadrado2Y=6;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 
 	public void selecionar10(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado10);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[1][0] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=1;
+			quadrado1Y=0;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==1 && quadrado1Y==0) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=1;
+			quadrado2Y=0;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar11(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado11);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[1][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=1;
+			quadrado1Y=1;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==1 && quadrado1Y==1) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=1;
+			quadrado2Y=1;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar12(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado12);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[1][2] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=1;
+			quadrado1Y=2;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==1 && quadrado1Y==2) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=1;
+			quadrado2Y=2;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar13(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado13);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[1][3] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=1;
+			quadrado1Y=3;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==1 && quadrado1Y==3) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=1;
+			quadrado2Y=3;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar14(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado14);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[1][4] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=1;
+			quadrado1Y=4;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==1 && quadrado1Y==4) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=1;
+			quadrado2Y=4;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar15(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado15);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[1][5] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=1;
+			quadrado1Y=5;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==1 && quadrado1Y==5) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=1;
+			quadrado2Y=5;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar16(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado16);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[1][6] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=1;
+			quadrado1Y=6;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==1 && quadrado1Y==6) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=1;
+			quadrado2Y=6;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 
 	public void selecionar20(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado20);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[2][0] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=2;
+			quadrado1Y=0;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==2 && quadrado1Y==0) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=2;
+			quadrado2Y=0;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar21(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado21);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[2][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=2;
+			quadrado1Y=1;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==2 && quadrado1Y==1) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=2;
+			quadrado2Y=1;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar22(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado22);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[2][2] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=2;
+			quadrado1Y=2;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==2 && quadrado1Y==2) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=2;
+			quadrado2Y=2;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar23(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado23);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[2][3] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=2;
+			quadrado1Y=3;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==2 && quadrado1Y==3) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=2;
+			quadrado2Y=3;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar24(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado24);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[2][4] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=2;
+			quadrado1Y=4;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==2 && quadrado1Y==4) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=2;
+			quadrado2Y=4;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar25(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado25);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[2][5] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=2;
+			quadrado1Y=5;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==2 && quadrado1Y==5) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=2;
+			quadrado2Y=5;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar26(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado26);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[2][6] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=2;
+			quadrado1Y=6;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==2 && quadrado1Y==6) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=2;
+			quadrado2Y=6;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 
 	public void selecionar30(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado30);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[3][0] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=3;
+			quadrado1Y=0;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==3 && quadrado1Y==0) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=3;
+			quadrado2Y=0;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar31(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado31);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[3][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=3;
+			quadrado1Y=1;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==3 && quadrado1Y==1) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=3;
+			quadrado2Y=1;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar32(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado32);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[3][2] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=3;
+			quadrado1Y=2;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==3 && quadrado1Y==2) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=3;
+			quadrado2Y=2;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar33(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado33);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[3][3] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=3;
+			quadrado1Y=3;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==3 && quadrado1Y==3) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=3;
+			quadrado2Y=3;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar34(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado34);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[3][4] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=3;
+			quadrado1Y=4;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==3 && quadrado1Y==4) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=3;
+			quadrado2Y=4;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar35(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado30);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[3][5] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=3;
+			quadrado1Y=5;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==3 && quadrado1Y==5) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=3;
+			quadrado2Y=5;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar36(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado30);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[3][6] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=3;
+			quadrado1Y=6;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==3 && quadrado1Y==6) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=3;
+			quadrado2Y=6;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 
 	public void selecionar40(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado40);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[4][0] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=4;
+			quadrado1Y=0;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==4 && quadrado1Y==0) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=4;
+			quadrado2Y=0;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar41(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado41);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[4][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=4;
+			quadrado1Y=1;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==4 && quadrado1Y==1) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=4;
+			quadrado2Y=1;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar42(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado42);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[4][2] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=4;
+			quadrado1Y=2;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==4 && quadrado1Y==2) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=4;
+			quadrado2Y=2;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar43(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado43);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[4][3] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=4;
+			quadrado1Y=3;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==4 && quadrado1Y==3) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=4;
+			quadrado2Y=3;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar44(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado44);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[4][4] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=4;
+			quadrado1Y=4;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==4 && quadrado1Y==4) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=4;
+			quadrado2Y=4;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar45(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado45);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[4][5] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=4;
+			quadrado1Y=5;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==4 && quadrado1Y==5) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=4;
+			quadrado2Y=5;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar46(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado46);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[4][6] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=4;
+			quadrado1Y=6;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==4 && quadrado1Y==6) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=4;
+			quadrado2Y=6;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 
 	public void selecionar50(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado50);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[5][0] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=5;
+			quadrado1Y=0;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==5 && quadrado1Y==0) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=5;
+			quadrado2Y=0;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar51(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado51);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[5][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=5;
+			quadrado1Y=1;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==5 && quadrado1Y==1) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=5;
+			quadrado2Y=1;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar52(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado52);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[5][2] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=5;
+			quadrado1Y=2;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==5 && quadrado1Y==2) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=5;
+			quadrado2Y=2;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar53(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado53);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[5][3] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=5;
+			quadrado1Y=3;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==5 && quadrado1Y==3) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=5;
+			quadrado2Y=3;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar54(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado54);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[5][4] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=5;
+			quadrado1Y=4;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==5 && quadrado1Y==4) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=5;
+			quadrado2Y=4;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar55(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado55);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[5][5] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=5;
+			quadrado1Y=5;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==5 && quadrado1Y==5) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=5;
+			quadrado2Y=5;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar56(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado56);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[5][6] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=5;
+			quadrado1Y=6;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==5 && quadrado1Y==6) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=5;
+			quadrado2Y=6;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 
 	public void selecionar60(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado60);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[6][0] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=6;
+			quadrado1Y=0;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==6 && quadrado1Y==0) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=6;
+			quadrado2Y=0;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar61(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado61);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[6][1] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=6;
+			quadrado1Y=1;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==6 && quadrado1Y==1) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=6;
+			quadrado2Y=1;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar62(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado62);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[6][2] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=6;
+			quadrado1Y=2;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==6 && quadrado1Y==2) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=6;
+			quadrado2Y=2;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar63(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado63);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[6][3] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=6;
+			quadrado1Y=3;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==6 && quadrado1Y==3) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=6;
+			quadrado2Y=3;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar64(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado64);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[6][4] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=6;
+			quadrado1Y=4;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==6 && quadrado1Y==4) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=6;
+			quadrado2Y=4;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 	
 	public void selecionar65(View view) {
 		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado65);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[6][5] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=6;
+			quadrado1Y=5;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==6 && quadrado1Y==5) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=6;
+			quadrado2Y=5;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
+		
 	}
 	
 	public void selecionar66(View view) {
+		
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado66);
+		
+		if (pecaSelecionada==false) {
+			
+			if (tabuleiro.mapaPos[6][6] <= 0)
+				return;
+			
+			pecaSelecionada=true;
+			
+			quadrado1X=6;
+			quadrado1Y=6;
+			
+			descobrirMovimento();
+		} else if (quadrado1X==6 && quadrado1Y==6) {
+			pecaSelecionada=false;
+
+			descobrirMovimento();
+		} else if (imagem.getDrawable().getConstantState() == this.getResources().getDrawable(R.drawable.quadrado_ir).getConstantState()) {
+			quadrado2X=6;
+			quadrado2Y=6;
+
+			descobrirMovimento();
+			//Trocar as peças de lugar
+			
+			pecaSelecionada=false;
+		}
 		
 	}
 }
