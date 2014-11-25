@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/peca_soldado_branco"
-                    android:contentDescription="@string/soldado" />
+                    android:contentDescription="@string/nome_soldado" />
 
                 <TextView
                     android:id="@+id/textoSoldado"
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/peca_mago_branco"
-                    android:contentDescription="@string/mago" />
+                    android:contentDescription="@string/nome_mago" />
 
                 <TextView
                     android:id="@+id/textoMago"
@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/peca_rei_branco"
-                    android:contentDescription="@string/rei" />
+                    android:contentDescription="@string/nome_rei" />
 
                 <TextView
                     android:id="@+id/textoRei"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/peca_arqueiro_branco"
-                    android:contentDescription="@string/arqueiro" />
+                    android:contentDescription="@string/nome_arqueiro" />
 
                 <TextView
                     android:id="@+id/textoArqueiro"

@@ -37,6 +37,8 @@ public class JogoActivity extends Activity {
 		SharedPreferences pecas = this.getSharedPreferences("pecas", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = estadoDoJogo.edit();
 		
+		ImageView marcaTurno;
+		
 		if ((estadoDoJogo.getBoolean("emJogo", false) == false) || (tabuleiro == null)) {
 			
 			editor.putBoolean("emJogo", true);
@@ -45,11 +47,14 @@ public class JogoActivity extends Activity {
 			if(estadoDoJogo.getBoolean("jogandoOnline", false) == false)	{
 				
 				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
-										pecas.getInt("meio", 2),
-										pecas.getInt("direita", 3));
+										pecas.getInt("meio", 1),
+										pecas.getInt("direita", 1));
 				
 				editor.putBoolean("jogandoOnline", false);
 				editor.commit();
+				
+				marcaTurno = (ImageView)findViewById(R.id.turno_vez);
+				marcaTurno.setVisibility(View.INVISIBLE);
 				
 			} else {
 				
@@ -59,8 +64,8 @@ public class JogoActivity extends Activity {
 				// Caso o jogo seja online como deve ser tratado?
 
 				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
-										pecas.getInt("meio", 2),
-										pecas.getInt("direita", 3),
+										pecas.getInt("meio", 1),
+										pecas.getInt("direita", 1),
 										-1,
 										-1,
 										-1);
@@ -100,6 +105,10 @@ public class JogoActivity extends Activity {
 		
 		return super.onOptionsItemSelected(item);
 	}
+	
+	/*
+	 * Responsavel por carregar todo tabuleiro assim que a activity é criada
+	 */
 	
 	public void carregarMapa() {
 
@@ -244,112 +253,147 @@ public class JogoActivity extends Activity {
 	
 	public int acharId(int x, int y) {
 		
-		if (x==0 && y==0)
-			return R.id.quadrado00;
-		if (x==0 && y==1)
-			return R.id.quadrado01;
-		if (x==0 && y==2)
-			return R.id.quadrado02;
-		if (x==0 && y==3)
-			return R.id.quadrado03;
-		if (x==0 && y==4)
-			return R.id.quadrado04;
-		if (x==0 && y==5)
-			return R.id.quadrado05;
-		if (x==0 && y==6)
-			return R.id.quadrado06;
-		
-		if (x==1 && y==0)
-			return R.id.quadrado10;
-		if (x==1 && y==1)
-			return R.id.quadrado11;
-		if (x==1 && y==2)
-			return R.id.quadrado12;
-		if (x==1 && y==3)
-			return R.id.quadrado13;
-		if (x==1 && y==4)
-			return R.id.quadrado14;
-		if (x==1 && y==5)
-			return R.id.quadrado15;
-		if (x==1 && y==6)
-			return R.id.quadrado16;
-		
-		if (x==2 && y==0)
-			return R.id.quadrado20;
-		if (x==2 && y==1)
-			return R.id.quadrado21;
-		if (x==2 && y==2)
-			return R.id.quadrado22;
-		if (x==2 && y==3)
-			return R.id.quadrado23;
-		if (x==2 && y==4)
-			return R.id.quadrado24;
-		if (x==2 && y==5)
-			return R.id.quadrado25;
-		if (x==2 && y==6)
-			return R.id.quadrado26;
-		
-		if (x==3 && y==0)
-			return R.id.quadrado30;
-		if (x==3 && y==1)
-			return R.id.quadrado31;
-		if (x==3 && y==2)
-			return R.id.quadrado32;
-		if (x==3 && y==3)
-			return R.id.quadrado33;
-		if (x==3 && y==4)
-			return R.id.quadrado34;
-		if (x==3 && y==5)
-			return R.id.quadrado35;
-		if (x==3 && y==6)
-			return R.id.quadrado36;
-		
-		if (x==4 && y==0)
-			return R.id.quadrado40;
-		if (x==4 && y==1)
-			return R.id.quadrado41;
-		if (x==4 && y==2)
-			return R.id.quadrado42;
-		if (x==4 && y==3)
-			return R.id.quadrado43;
-		if (x==4 && y==4)
-			return R.id.quadrado44;
-		if (x==4 && y==5)
-			return R.id.quadrado45;
-		if (x==4 && y==6)
-			return R.id.quadrado46;
-		
-		if (x==5 && y==0)
-			return R.id.quadrado50;
-		if (x==5 && y==1)
-			return R.id.quadrado51;
-		if (x==5 && y==2)
-			return R.id.quadrado52;
-		if (x==5 && y==3)
-			return R.id.quadrado53;
-		if (x==5 && y==4)
-			return R.id.quadrado54;
-		if (x==5 && y==5)
-			return R.id.quadrado55;
-		if (x==5 && y==6)
-			return R.id.quadrado56;
-		
-		if (x==6 && y==0)
-			return R.id.quadrado60;
-		if (x==6 && y==1)
-			return R.id.quadrado61;
-		if (x==6 && y==2)
-			return R.id.quadrado62;
-		if (x==6 && y==3)
-			return R.id.quadrado63;
-		if (x==6 && y==4)
-			return R.id.quadrado64;
-		if (x==6 && y==5)
-			return R.id.quadrado65;
-		if (x==6 && y==6)
-			return R.id.quadrado66;
+		if (x==0) {
+			if (y==0)
+				return R.id.quadrado00;
+			if (y==1)
+				return R.id.quadrado01;
+			if (y==2)
+				return R.id.quadrado02;
+			if (y==3)
+				return R.id.quadrado03;
+			if (y==4)
+				return R.id.quadrado04;
+			if (y==5)
+				return R.id.quadrado05;
+			if (y==6)
+				return R.id.quadrado06;
+		}
+		else if (x==1) {
+			if (y==0)
+				return R.id.quadrado10;
+			if (y==1)
+				return R.id.quadrado11;
+			if (y==2)
+				return R.id.quadrado12;
+			if (y==3)
+				return R.id.quadrado13;
+			if (y==4)
+				return R.id.quadrado14;
+			if (y==5)
+				return R.id.quadrado15;
+			if (y==6)
+				return R.id.quadrado16;
+		}
+		else if (x==2) {
+			if (y==0)
+				return R.id.quadrado20;
+			if (y==1)
+				return R.id.quadrado21;
+			if (y==2)
+				return R.id.quadrado22;
+			if (y==3)
+				return R.id.quadrado23;
+			if (y==4)
+				return R.id.quadrado24;
+			if (y==5)
+				return R.id.quadrado25;
+			if (y==6)
+				return R.id.quadrado26;
+		}
+		else if (x==3) {
+			if (y==0)
+				return R.id.quadrado30;
+			if (y==1)
+				return R.id.quadrado31;
+			if (y==2)
+				return R.id.quadrado32;
+			if (y==3)
+				return R.id.quadrado33;
+			if (y==4)
+				return R.id.quadrado34;
+			if (y==5)
+				return R.id.quadrado35;
+			if (y==6)
+				return R.id.quadrado36;
+		}
+		else if (x==4) {
+			if (y==0)
+				return R.id.quadrado40;
+			if (y==1)
+				return R.id.quadrado41;
+			if (y==2)
+				return R.id.quadrado42;
+			if (y==3)
+				return R.id.quadrado43;
+			if (y==4)
+				return R.id.quadrado44;
+			if (y==5)
+				return R.id.quadrado45;
+			if (y==6)
+				return R.id.quadrado46;
+		}
+		else if (x==5) {
+			if (y==0)
+				return R.id.quadrado50;
+			if (y==1)
+				return R.id.quadrado51;
+			if (y==2)
+				return R.id.quadrado52;
+			if (y==3)
+				return R.id.quadrado53;
+			if (y==4)
+				return R.id.quadrado54;
+			if (y==5)
+				return R.id.quadrado55;
+			if (y==6)
+				return R.id.quadrado56;
+		}
+		else if (x==6) {
+			if (y==0)
+				return R.id.quadrado60;
+			if (y==1)
+				return R.id.quadrado61;
+			if (y==2)
+				return R.id.quadrado62;
+			if (y==3)
+				return R.id.quadrado63;
+			if (y==4)
+				return R.id.quadrado64;
+			if (y==5)
+				return R.id.quadrado65;
+			if (y==6)
+				return R.id.quadrado66;
+		}
 		
 		return -1;
+	}
+	
+	/*
+	 * Responsavel pela movimentação da peça, em outras palavras move uma peça para uma posição e deixa vazio onde ela tava.
+	 * Muda os valores da matriz mas em vez de chamar a funcao 'carregarMapa' apenas carrega as duas posições (onde a peça tava e onde foi).
+	 */
+	
+	public void Mover() {
+		ImageView x;
+		
+		tabuleiro.mapaPos[quadrado2X][quadrado2Y] = tabuleiro.mapaPos[quadrado1X][quadrado1Y];
+		tabuleiro.mapaPos[quadrado1X][quadrado1Y] = 0;
+		
+		x = (ImageView)findViewById(acharId(quadrado2X, quadrado2Y));
+		x.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado2X][quadrado2Y]));
+		
+		x = (ImageView)findViewById(acharId(quadrado1X, quadrado1Y));
+		x.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y]));
+		
+		SharedPreferences jogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
+		if (jogo.getBoolean("jogandoOnline", false) == true) {
+			//Caso seja online como tratar?
+		} else {
+			tabuleiro.inverter();
+			carregarMapa();
+		}
+		
 	}
 	
 	/*
@@ -776,7 +820,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=0;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -807,7 +851,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=1;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -838,7 +882,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=2;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -869,7 +913,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=3;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -882,7 +926,7 @@ public class JogoActivity extends Activity {
 		
 		if (pecaSelecionada==false) {
 			
-			if (tabuleiro.mapaPos[0][1] <= 0)
+			if (tabuleiro.mapaPos[0][4] <= 0)
 				return;
 			
 			pecaSelecionada=true;
@@ -900,7 +944,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=4;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -931,7 +975,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=5;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -962,7 +1006,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=6;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -993,7 +1037,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=0;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1024,7 +1068,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=1;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1055,7 +1099,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=2;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1086,7 +1130,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=3;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1117,7 +1161,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=4;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1148,7 +1192,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=5;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1179,7 +1223,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=6;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1210,7 +1254,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=0;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1241,7 +1285,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=1;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1272,7 +1316,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=2;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1303,7 +1347,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=3;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1334,7 +1378,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=4;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1365,7 +1409,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=5;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1396,7 +1440,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=6;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1427,7 +1471,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=0;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1458,7 +1502,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=1;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1489,7 +1533,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=2;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1520,7 +1564,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=3;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1551,7 +1595,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=4;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1560,7 +1604,7 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar35(View view) {
 		
-		ImageView imagem = (ImageView)findViewById(R.id.quadrado30);
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado35);
 		
 		if (pecaSelecionada==false) {
 			
@@ -1582,7 +1626,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=5;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1591,7 +1635,7 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar36(View view) {
 		
-		ImageView imagem = (ImageView)findViewById(R.id.quadrado30);
+		ImageView imagem = (ImageView)findViewById(R.id.quadrado36);
 		
 		if (pecaSelecionada==false) {
 			
@@ -1613,7 +1657,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=6;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1644,7 +1688,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=0;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1675,7 +1719,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=1;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1706,7 +1750,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=2;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1737,7 +1781,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=3;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1768,7 +1812,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=4;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1799,7 +1843,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=5;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1830,7 +1874,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=6;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1861,7 +1905,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=0;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1892,7 +1936,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=1;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1923,7 +1967,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=2;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1954,7 +1998,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=3;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -1985,7 +2029,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=4;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2016,7 +2060,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=5;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2047,7 +2091,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=6;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2078,7 +2122,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=0;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2109,7 +2153,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=1;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2140,7 +2184,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=2;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2171,7 +2215,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=3;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2202,7 +2246,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=4;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2233,7 +2277,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=5;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}
@@ -2264,7 +2308,7 @@ public class JogoActivity extends Activity {
 			quadrado2Y=6;
 
 			descobrirMovimento();
-			//Trocar as peças de lugar
+			Mover();
 			
 			pecaSelecionada=false;
 		}

@@ -60,18 +60,20 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     	
     	SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
     	SharedPreferences.Editor editor = estadoDoJogo.edit();
-    	Intent i = new Intent(this, JogoActivity.class);
+    	Intent i;
     	
     	switch(item.getItemId()) {
 	    	case R.id.menu_offline:
 	    		editor.putBoolean("jogandoOnline", false);
 	    		editor.commit();
+	    		i = new Intent(this, JogoActivity.class);
 	    		startActivity(i);
 	    	return true;
 	    	
 	    	case R.id.menu_online:
 	    		editor.putBoolean("jogandoOnline", true);
 	    		editor.commit();
+	    		i = new Intent(this, BuscandoActivity.class);
 	    		startActivity(i);
 	    	return true;
 	    	

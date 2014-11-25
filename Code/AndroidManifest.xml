@@ -38,6 +38,13 @@
             android:name=".JogoActivity"
             android:label="@string/title_activity_jogo" >
         </activity>
+        <activity
+            android:name=".BuscandoActivity"
+            android:label="@string/title_activity_buscando" >
+        </activity>
+        <service
+            android:name="com.example.background.Busca" >
+        </service>
     </application>
 
 </manifest>

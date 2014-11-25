@@ -19,9 +19,9 @@ public class PecasActivity extends Activity {
 		setContentView(R.layout.activity_pecas);
 		
 		SharedPreferences preferencias = getSharedPreferences("pecas", Context.MODE_PRIVATE);
-		marcarEsquerda(preferencias.getInt("esquerda", 0));
-		marcarMeio(preferencias.getInt("meio", 0));
-		marcarDireita(preferencias.getInt("direita", 0));
+		marcarEsquerda(preferencias.getInt("esquerda", 1));
+		marcarMeio(preferencias.getInt("meio", 1));
+		marcarDireita(preferencias.getInt("direita", 1));
 	}
 	
 	@Override
@@ -42,6 +42,8 @@ public class PecasActivity extends Activity {
 		editor.putInt("direita", pecaMarcadaDireita());
 		
 		editor.commit();
+		
+		Toast.makeText(this, "Peças salvas", Toast.LENGTH_SHORT).show();
 		return true;
 	}
 	

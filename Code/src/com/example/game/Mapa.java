@@ -38,4 +38,14 @@ public class Mapa {
 		mapaPos[0][3] = y;
 		mapaPos[0][5] = z;
 	}
+	
+	public void inverter () {
+		int i, j;
+		
+		for (i=0; i<=6; i++) {
+			for (j=0; j<=6; j++) {
+				mapaPos[i][j]*=-1;
+			}
+		}
+	}
 }
