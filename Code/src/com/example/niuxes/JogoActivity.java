@@ -2,6 +2,7 @@ package com.example.niuxes;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.game.Mapa;
 
@@ -85,7 +85,8 @@ public class JogoActivity extends Activity {
 		editor.putBoolean("emJogo", false);
 		editor.commit();
 		
-		super.onBackPressed();
+		Intent i = new Intent(this, MainActivity.class);
+		this.startActivity(i);
 	}
 	
 	@Override

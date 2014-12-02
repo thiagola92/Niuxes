@@ -25,6 +25,11 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
         
     }
     
+    @Override
+    public void onBackPressed() {
+    	// Não deixa voltar pra o jogo ou para a activity anterior
+    }
+    
     public void jogar (View view) {
     	SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
     	Intent i = new Intent(this, JogoActivity.class);

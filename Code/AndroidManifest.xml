@@ -8,11 +8,14 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -22,29 +25,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name=".SobreActivity"
-            android:label="@string/title_activity_sobre" >
-        </activity>
+            android:label="@string/title_activity_sobre" />
+        
         <activity
             android:name=".ConfiguracoesActivity"
-            android:label="@string/title_activity_configuracoes" >
-        </activity>
+            android:label="@string/title_activity_configuracoes" />
+        
         <activity
             android:name=".PecasActivity"
-            android:label="@string/title_activity_pecas" >
-        </activity>
+            android:label="@string/title_activity_pecas" />
+        
         <activity
             android:name=".JogoActivity"
-            android:label="@string/title_activity_jogo" >
-        </activity>
+            android:label="@string/title_activity_jogo" />
+        
         <activity
             android:name=".BuscandoActivity"
-            android:label="@string/title_activity_buscando" >
-        </activity>
+            android:label="@string/title_activity_buscando" />
+        
         <service
-            android:name="com.example.background.Busca" >
-        </service>
+            android:name="com.example.background.Busca" />
+        
     </application>
 
 </manifest>
