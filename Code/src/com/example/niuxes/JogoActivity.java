@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import com.example.game.Mapa;
 
 public class JogoActivity extends Activity {
 	
+	// matrix com o mapa
 	static public Mapa tabuleiro;
 	
 	// quadrado selecionado
@@ -25,43 +28,51 @@ public class JogoActivity extends Activity {
 	public int quadrado2X;
 	public int quadrado2Y;
 	
+	// modo de jogo (configuracoes)
+	public boolean jogoOnline = false;
+	public boolean daltonico = false;
+	public boolean som = true;
+	
 	// caso o jogador já tenha selecionado uma peça
 	public boolean pecaSelecionada = false;
+	
+	// se é ou não seu turno
+	public boolean seuTurno = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_jogo);
 		
+		// Preferencias do jogo
 		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
-		SharedPreferences pecas = this.getSharedPreferences("pecas", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = estadoDoJogo.edit();
-		
-		ImageView marcaTurno;
+
+		// Outras preferencias
+		SharedPreferences pecas = this.getSharedPreferences("pecas", Context.MODE_PRIVATE);
+		SharedPreferences config = this.getSharedPreferences("config", Context.MODE_PRIVATE);
 		
 		if ((estadoDoJogo.getBoolean("emJogo", false) == false) || (tabuleiro == null)) {
 			
 			editor.putBoolean("emJogo", true);
 			editor.commit();
 			
-			if(estadoDoJogo.getBoolean("jogandoOnline", false) == false)	{
+			jogoOnline = estadoDoJogo.getBoolean("jogandoOnline", false);
+			som = config.getBoolean("som", true);
+			daltonico = config.getBoolean("daltonico", false);
+			
+			if(jogoOnline == false)	{
 				
 				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
 										pecas.getInt("meio", 1),
 										pecas.getInt("direita", 1));
 				
-				editor.putBoolean("jogandoOnline", false);
-				editor.commit();
-				
-				marcaTurno = (ImageView)findViewById(R.id.turno_vez);
-				marcaTurno.setVisibility(View.INVISIBLE);
-				
 			} else {
 				
-				editor.putBoolean("jogandoOnline", true);
-				editor.commit();
+				// ISSO É TEMPORARIO ENQUANTO N TEM COMO DECIDIR QUEM COMEÇAR
+				seuTurno = false;
 				
-				// Caso o jogo seja online como deve ser tratado?
+				// TODO Caso o jogo seja online como deve ser tratado?
 
 				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
 										pecas.getInt("meio", 1),
@@ -78,10 +89,8 @@ public class JogoActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		
 		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = estadoDoJogo.edit();
-
 		editor.putBoolean("emJogo", false);
 		editor.commit();
 		
@@ -108,11 +117,18 @@ public class JogoActivity extends Activity {
 	}
 	
 	/*
-	 * Responsavel por carregar todo tabuleiro assim que a activity é criada
+	 * Responsavel por carregar todo tabuleiro assim que a activity é criada e carregar de quem é o turno.
 	 */
 	
 	public void carregarMapa() {
-
+		
+		if (jogoOnline)
+			avisoTurno();
+		else {
+			ImageView a = (ImageView)findViewById(R.id.turno_vez);
+			a.setVisibility(View.INVISIBLE);
+		}
+		
 		ImageView x = (ImageView)findViewById(R.id.quadrado00);
 		x.setImageResource(acharImagem(tabuleiro.mapaPos[0][0]));
 		x = (ImageView)findViewById(R.id.quadrado01);
@@ -219,6 +235,32 @@ public class JogoActivity extends Activity {
 		x.setImageResource(acharImagem(tabuleiro.mapaPos[6][6]));
 	}
 
+	/*
+	 * Apenas carrega o simbolo que avisa se é o seu turno.
+	 */
+	
+	public void avisoTurno() {
+		ImageView x = (ImageView)findViewById(R.id.turno_vez);
+		
+		if (seuTurno)
+			seuTurno = false;
+		else
+			seuTurno = true;
+		
+		
+		if (daltonico) {
+			if (seuTurno)
+				x.setImageResource(R.drawable.jogo_turno_3);
+			else
+				x.setImageResource(R.drawable.jogo_turno_4);
+		} else {
+			if (seuTurno)
+				x.setImageResource(R.drawable.jogo_turno_1);
+			else
+				x.setImageResource(R.drawable.jogo_turno_2);
+		}
+	}
+	
 	/*
 	 * Passe o valor no tabuleiro e vai devolver qual imagem deve ser desenhada lá.
 	 */
@@ -386,15 +428,27 @@ public class JogoActivity extends Activity {
 		
 		x = (ImageView)findViewById(acharId(quadrado1X, quadrado1Y));
 		x.setImageResource(acharImagem(tabuleiro.mapaPos[quadrado1X][quadrado1Y]));
+
+		if (som)
+			tocarSom();
 		
-		SharedPreferences jogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
-		if (jogo.getBoolean("jogandoOnline", false) == true) {
-			//Caso seja online como tratar?
+		if (jogoOnline == true) {
+			// TODO Caso seja online como tratar?
+			carregarMapa();
 		} else {
 			tabuleiro.inverter();
 			carregarMapa();
 		}
 		
+	}
+	
+	/*
+	 * Responsavel por tocar um som quando uma jogada é feita.
+	 */
+	
+	public void tocarSom() {
+		MediaPlayer mediaplayer = MediaPlayer.create(this, R.raw.mover);
+		mediaplayer.start();
 	}
 	
 	/*
@@ -799,6 +853,9 @@ public class JogoActivity extends Activity {
 
 	public void selecionar00(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado00);
 		
 		if (pecaSelecionada==false) {
@@ -829,6 +886,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar01(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado01);
 		
@@ -861,6 +921,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar02(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado02);
 		
 		if (pecaSelecionada==false) {
@@ -891,6 +954,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar03(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado03);
 		
@@ -923,6 +989,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar04(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado04);
 		
 		if (pecaSelecionada==false) {
@@ -953,6 +1022,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar05(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado05);
 		
@@ -985,6 +1057,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar06(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado06);
 		
 		if (pecaSelecionada==false) {
@@ -1015,6 +1090,9 @@ public class JogoActivity extends Activity {
 	}
 
 	public void selecionar10(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado10);
 		
@@ -1047,6 +1125,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar11(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado11);
 		
 		if (pecaSelecionada==false) {
@@ -1077,6 +1158,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar12(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado12);
 		
@@ -1109,6 +1193,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar13(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado13);
 		
 		if (pecaSelecionada==false) {
@@ -1139,6 +1226,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar14(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado14);
 		
@@ -1171,6 +1261,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar15(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado15);
 		
 		if (pecaSelecionada==false) {
@@ -1201,6 +1294,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar16(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado16);
 		
@@ -1233,6 +1329,9 @@ public class JogoActivity extends Activity {
 
 	public void selecionar20(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado20);
 		
 		if (pecaSelecionada==false) {
@@ -1263,6 +1362,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar21(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado21);
 		
@@ -1295,6 +1397,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar22(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado22);
 		
 		if (pecaSelecionada==false) {
@@ -1325,6 +1430,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar23(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado23);
 		
@@ -1357,6 +1465,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar24(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado24);
 		
 		if (pecaSelecionada==false) {
@@ -1387,6 +1498,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar25(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado25);
 		
@@ -1419,6 +1533,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar26(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado26);
 		
 		if (pecaSelecionada==false) {
@@ -1449,6 +1566,9 @@ public class JogoActivity extends Activity {
 	}
 
 	public void selecionar30(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado30);
 		
@@ -1481,6 +1601,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar31(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado31);
 		
 		if (pecaSelecionada==false) {
@@ -1511,6 +1634,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar32(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado32);
 		
@@ -1543,6 +1669,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar33(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado33);
 		
 		if (pecaSelecionada==false) {
@@ -1573,6 +1702,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar34(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado34);
 		
@@ -1605,6 +1737,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar35(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado35);
 		
 		if (pecaSelecionada==false) {
@@ -1635,6 +1770,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar36(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado36);
 		
@@ -1667,6 +1805,9 @@ public class JogoActivity extends Activity {
 
 	public void selecionar40(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado40);
 		
 		if (pecaSelecionada==false) {
@@ -1697,6 +1838,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar41(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado41);
 		
@@ -1729,6 +1873,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar42(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado42);
 		
 		if (pecaSelecionada==false) {
@@ -1759,6 +1906,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar43(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado43);
 		
@@ -1791,6 +1941,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar44(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado44);
 		
 		if (pecaSelecionada==false) {
@@ -1821,6 +1974,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar45(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado45);
 		
@@ -1853,6 +2009,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar46(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado46);
 		
 		if (pecaSelecionada==false) {
@@ -1883,6 +2042,9 @@ public class JogoActivity extends Activity {
 	}
 
 	public void selecionar50(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado50);
 		
@@ -1915,6 +2077,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar51(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado51);
 		
 		if (pecaSelecionada==false) {
@@ -1945,6 +2110,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar52(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado52);
 		
@@ -1977,6 +2145,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar53(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado53);
 		
 		if (pecaSelecionada==false) {
@@ -2007,6 +2178,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar54(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado54);
 		
@@ -2039,6 +2213,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar55(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado55);
 		
 		if (pecaSelecionada==false) {
@@ -2069,6 +2246,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar56(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado56);
 		
@@ -2101,6 +2281,9 @@ public class JogoActivity extends Activity {
 
 	public void selecionar60(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado60);
 		
 		if (pecaSelecionada==false) {
@@ -2131,6 +2314,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar61(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado61);
 		
@@ -2163,6 +2349,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar62(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado62);
 		
 		if (pecaSelecionada==false) {
@@ -2193,6 +2382,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar63(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado63);
 		
@@ -2225,6 +2417,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar64(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado64);
 		
 		if (pecaSelecionada==false) {
@@ -2256,6 +2451,9 @@ public class JogoActivity extends Activity {
 	
 	public void selecionar65(View view) {
 		
+		if (seuTurno == false) 
+			return;
+		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado65);
 		
 		if (pecaSelecionada==false) {
@@ -2286,6 +2484,9 @@ public class JogoActivity extends Activity {
 	}
 	
 	public void selecionar66(View view) {
+		
+		if (seuTurno == false) 
+			return;
 		
 		ImageView imagem = (ImageView)findViewById(R.id.quadrado66);
 		
