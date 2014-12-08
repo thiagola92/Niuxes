@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 	    		startActivity(i);
 	    	return true;
 	    	
-	    	case R.id.menu_online:
+	    	case R.id.menu_bluetooth:
 	    		editor.putBoolean("jogandoOnline", true);
 	    		editor.commit();
 	    		i = new Intent(this, BuscandoActivity.class);

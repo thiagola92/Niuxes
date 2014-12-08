@@ -8,7 +8,7 @@
     <string name="botao_configuracoes">Configurações</string>
     <string name="botao_sobre">Sobre</string>
     <string name="offline">Offline</string>
-    <string name="online">Online</string>
+    <string name="bluetooth">Bluetooth</string>
 
     <!-- Activity Sobre -->
     <string name="title_activity_sobre">Sobre</string>
@@ -27,12 +27,16 @@
     <string name="radio_esquerda">Esquerda</string>
     <string name="radio_meio">Meio</string>
     <string name="radio_direita">Direita</string>
+    <string name="pecas_salvas">Peças salvas</string>
 
     <!-- Activity Jogo -->
     <string name="title_activity_jogo">Jogo</string>
     <string name="novo_jogo">Novo jogo</string>
-
-    <!-- Descrição -->
+    <string name="dialog_sair">Ao sair o seu jogo atual será perdido, tem certeza disso?</string>
+	<string name="sim">Sim</string>
+	<string name="nao">Não</string>
+    
+    <!-- Activity Jogo (Descrição para cegos) -->
     <string name="turno_seu">Seu turno</string>
     <string name="turno_oponente">Turno do oponente</string>
     <string name="quadrado00">1x1</string>
@@ -88,5 +92,9 @@
     <!-- Buscando Activity -->
     <string name="title_activity_buscando">Buscando</string>
     <string name="aguarde">Aguarde enquantos procuramos por um adversário para você</string>
+    <string name="nao_tem_bt">Seu celular não tem bluetooth</string>
+    <string name="bluetooth_desativado">Bluetooth não foi ativado, operação cancelada</string>
+    <string name="erro_ao_tentar_descobrir">Erro ao tentar descobrir outros aparelhos</string>
+    <string name="bluetooth_nao_descoberto">A busca pode demorar mais</string>
     
 </resources>

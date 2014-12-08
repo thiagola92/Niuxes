@@ -43,7 +43,9 @@ public class PecasActivity extends Activity {
 		
 		editor.commit();
 		
-		Toast.makeText(this, "Peças salvas", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, R.string.pecas_salvas, Toast.LENGTH_SHORT).show();
+		
+		this.onBackPressed();
 		return true;
 	}
 	

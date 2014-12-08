@@ -10,7 +10,7 @@ import android.preference.PreferenceActivity;
 
 public class ConfiguracoesActivity extends PreferenceActivity {
 	
-	Context c;
+	Context c = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +18,6 @@ public class ConfiguracoesActivity extends PreferenceActivity {
 		this.addPreferencesFromResource(R.xml.configuracoes);
 
 		SharedPreferences config = this.getSharedPreferences("config", Context.MODE_PRIVATE);
-		
-		// Para que o listener possa achar
-		c=this;
 		
 		/*
 		 * 

@@ -1,12 +1,15 @@
 package com.example.niuxes;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +19,9 @@ import android.widget.ImageView;
 import com.example.game.Mapa;
 
 public class JogoActivity extends Activity {
+	
+	// Context
+	Context c = this;
 	
 	// matrix com o mapa
 	static public Mapa tabuleiro;
@@ -89,13 +95,38 @@ public class JogoActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		SharedPreferences estadoDoJogo = this.getSharedPreferences("jogo", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = estadoDoJogo.edit();
-		editor.putBoolean("emJogo", false);
-		editor.commit();
 		
-		Intent i = new Intent(this, MainActivity.class);
-		this.startActivity(i);
+		// Construindo um dialogo antes de sair do jogo
+		AlertDialog.Builder construirDialog = new AlertDialog.Builder(this);
+		construirDialog.setMessage(R.string.dialog_sair);
+				
+		// Caso sim
+		construirDialog.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+					
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				SharedPreferences estadoDoJogo = c.getSharedPreferences("jogo", Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = estadoDoJogo.edit();
+				editor.putBoolean("emJogo", false);
+				editor.commit();
+				
+				Intent i = new Intent(c, MainActivity.class);
+				c.startActivity(i);
+						
+			}
+		} );
+				
+		// Caso não
+		construirDialog.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
+					
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+						
+			}
+		} );
+		
+		construirDialog.show();
 	}
 	
 	@Override

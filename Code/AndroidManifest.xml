@@ -6,9 +6,10 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+        android:targetSdkVersion="21" />
+    
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     
     <application
         android:allowBackup="true"
@@ -45,9 +46,6 @@
         <activity
             android:name=".BuscandoActivity"
             android:label="@string/title_activity_buscando" />
-        
-        <service
-            android:name="com.example.background.Busca" />
         
     </application>
 
