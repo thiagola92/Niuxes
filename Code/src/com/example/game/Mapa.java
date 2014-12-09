@@ -32,6 +32,39 @@ public class Mapa {
 		}
 	}
 	
+	/*
+	 * Retorna -1 se o inimigo tiver ganho
+	 * Retorna 1 se vc tiver ganho
+	 * 0 caso o jogo não tenha acabado
+	 */
+	public int fimDeJogo() {
+		int ganhador=0;
+		
+		for (int x=0; x!=7; x++ ) {
+			for (int y=0; y!=7; y++) {
+				if (mapaPos[x][y] > 0)
+					ganhador++;
+			}
+		}
+		
+		if (ganhador==0)
+			return -1;
+		
+		ganhador=0;
+		
+		for (int x=0; x!=7; x++ ) {
+			for (int y=0; y!=7; y++) {
+				if (mapaPos[x][y] < 0)
+					ganhador+=mapaPos[x][y];
+			}
+		}
+		
+		if (ganhador==0)
+			return 1;
+		
+		return 0;
+	}
+	
 	public void receberDeBytes(byte[] objeto) {
 		mapaPos[0][0] = objeto[0];
 		mapaPos[0][1] = objeto[1];

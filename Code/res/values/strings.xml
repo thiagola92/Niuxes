@@ -38,6 +38,8 @@
     <string name="dialog_sair">Ao sair o seu jogo atual será perdido, tem certeza disso?</string>
 	<string name="sim">Sim</string>
 	<string name="nao">Não</string>
+	<string name="vitoria">Vitória!</string>
+	<string name="derrota">Derrota</string>
     
     <!-- Activity Jogo (Descrição para cegos) -->
     <string name="turno_seu">Seu turno</string>

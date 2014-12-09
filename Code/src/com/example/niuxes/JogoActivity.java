@@ -18,11 +18,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.game.BluetoothGame;
 import com.example.game.Mapa;
@@ -126,6 +131,9 @@ public class JogoActivity extends Activity {
 				tabuleiro.receberDeBytes(objeto);
 				
 				carregarMapa();
+				if (tabuleiro.fimDeJogo()==-1) {
+					derrota();
+				}
 				
 				if (DEBUG) Log.v(TAG, ">>> etapa 2 terminada <<<");
 			}
@@ -565,6 +573,9 @@ public class JogoActivity extends Activity {
 		
 		if (jogoOnline == true) {
 			partidaThread.write(tabuleiro.converterParaBytes());
+			if (tabuleiro.fimDeJogo()==1) {
+				vitoria();
+			}
 			seuTurno=false;
 		} else {
 			tabuleiro.inverter();
@@ -953,6 +964,43 @@ public class JogoActivity extends Activity {
 				imagem.setImageResource(R.drawable.quadrado_ir);
 			}
 		}
+		
+	}
+	
+	/*
+	 * Jogo finalizado (fim de jogo)
+	 */
+	
+	public void vitoria() {
+		
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.toast_layout,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+		TextView text = (TextView) layout.findViewById(R.id.text);
+		text.setText(R.string.vitoria);
+		
+		Toast toast = new Toast(this);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setView(layout);
+		toast.show();
+	}
+	
+	public void derrota() {
+		
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.toast_layout_2,
+                (ViewGroup) findViewById(R.id.toast_layout_root_2));
+
+		TextView text = (TextView) layout.findViewById(R.id.text2);
+		text.setText(R.string.derrota);
+		
+		Toast toast = new Toast(this);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.setDuration(Toast.LENGTH_LONG);
+		toast.setView(layout);
+		toast.show();
 		
 	}
 	
