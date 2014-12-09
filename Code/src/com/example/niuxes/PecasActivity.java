@@ -12,6 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class PecasActivity extends Activity {
+	
+	boolean jogador1 = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +36,44 @@ public class PecasActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
-		SharedPreferences preferencias = getSharedPreferences("pecas", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = preferencias.edit();
+			SharedPreferences preferencias = getSharedPreferences("pecas", Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = preferencias.edit();
 		
-		editor.putInt("esquerda", pecaMarcadaEsquerda());
-		editor.putInt("meio", pecaMarcadaMeio());
-		editor.putInt("direita", pecaMarcadaDireita());
+		if (item.getItemId() == R.id.salvarPecas) {
+			
+			if (jogador1) {
+			
+				editor.putInt("esquerda", pecaMarcadaEsquerda());
+				editor.putInt("meio", pecaMarcadaMeio());
+				editor.putInt("direita", pecaMarcadaDireita());
+				
+				editor.commit();
+			} else {
+
+				editor.putInt("esquerda2", pecaMarcadaEsquerda());
+				editor.putInt("meio2", pecaMarcadaMeio());
+				editor.putInt("direita2", pecaMarcadaDireita());
+				
+				editor.commit();
+			}
+			
+			Toast.makeText(this, R.string.pecas_salvas, Toast.LENGTH_SHORT).show();
+		} else if (item.getItemId() == R.id.mudarJogador) {
+			
+			if (jogador1) {
+				
+				jogador1=false;
+				Toast.makeText(this, R.string.jogador2, Toast.LENGTH_SHORT).show();
+			
+			} else {
+				
+				jogador1=true;
+				Toast.makeText(this, R.string.jogador1, Toast.LENGTH_SHORT).show();
+				
+			}
+			
+		}
 		
-		editor.commit();
-		
-		Toast.makeText(this, R.string.pecas_salvas, Toast.LENGTH_SHORT).show();
-		
-		this.onBackPressed();
 		return true;
 	}
 	

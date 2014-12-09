@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.game.BluetoothGame;
 
 public class BuscandoActivity extends Activity {
 	
@@ -28,7 +29,7 @@ public class BuscandoActivity extends Activity {
 	// Fixo
 	int REQUEST_ENABLE_BT = 1;
 	int REQUEST_BE_DISCOVERABLE = 2;
-	int TEMPO_DESCOBERTO = 30;
+	int TEMPO_DESCOBERTO = 120;
 	String NOME = "Niuxes";
 	String RANDOM_UUID = "ecb5e585-e248-4582-ae10-9f8f2f990954";
 	Context c = this;
@@ -192,10 +193,10 @@ public class BuscandoActivity extends Activity {
 				if (DEBUG) Log.v(TAG, ">>> startDiscovery terminou <<<");
 				
 				// Após o discovery ter terminado, começar a servir de server
-				Thread x = new Thread(new ConexaoServerThread());
+				Thread x = new ConexaoServerThread();
 				x.start();
 				
-				Thread y = new Thread(new ConexaoClientThread());
+				Thread y = new ConexaoClientThread();
 				y.start();
 			}
 			
@@ -242,7 +243,7 @@ public class BuscandoActivity extends Activity {
 				if (socket != null) {
 					if (DEBUG) Log.v(TAG, ">>> Alguem se connectou a você (socket) <<<");
 					procurandoConexao = false;
-					// TODO chamar uma função que vai cuidar da conexao, passando o socket
+					comecarJogo(socket);
 					this.cancel();
 					break;
 				}
@@ -320,7 +321,7 @@ public class BuscandoActivity extends Activity {
 					mmSocket.close();
 				} catch (IOException closeException) { }
 				threadsTrabalhando--;
-				Thread x = new Thread(new ConexaoClientThread());
+				Thread x = new ConexaoClientThread();
 				x.start();
 				return;
 			}
@@ -328,7 +329,7 @@ public class BuscandoActivity extends Activity {
 			if (DEBUG) Log.v(TAG, ">>> ConexaoClientThread conseguio se conectar a alguém <<<");
 			
 			procurandoConexao = false;
-			// TODO fazer uma função para controlar o socket, passando socket
+			comecarJogo(mmSocket);
 		}
 		
 		public void cancel() {
@@ -337,6 +338,12 @@ public class BuscandoActivity extends Activity {
 			} catch (IOException e) { }
 		}
 		
+	}
+	
+	public void comecarJogo(BluetoothSocket socket) {
+		BluetoothGame.inicializar(socket);
+		Intent i = new Intent(c, JogoActivity.class);
+		startActivity(i);
 	}
 	
 	@Override

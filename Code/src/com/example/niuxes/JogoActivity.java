@@ -1,24 +1,42 @@
 package com.example.niuxes;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Random;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.game.BluetoothGame;
 import com.example.game.Mapa;
 
 public class JogoActivity extends Activity {
+	
+	// Debug
+	boolean DEBUG = true;
+	String TAG = "JogoActivity";
+
+	// Usado para saber quem começa durante a partida online
+	Random numeroRandom;
+	int seuRandom;
+	boolean decidiram=false;
 	
 	// Context
 	Context c = this;
@@ -44,6 +62,75 @@ public class JogoActivity extends Activity {
 	
 	// se é ou não seu turno
 	public boolean seuTurno = true;
+	
+	// Bluetooth
+	BluetoothSocket socket;
+	ConexaoThread partidaThread;
+	
+	// Em qual etapa do processo esta
+	int etapa=0;
+	
+	Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			if (etapa == 0) {
+				
+				if (DEBUG) Log.v(TAG, ">>> etapa 0 comecou <<<");
+				
+				byte[] objeto = (byte[])msg.obj;
+				
+				String recebida = new String(objeto);
+				int oponenteRandom = Integer.valueOf(recebida);
+				
+				if (seuRandom < oponenteRandom)
+					seuTurno=true;
+				else
+					seuTurno=false;
+				
+				if (DEBUG) Log.v(TAG, ">>> seuRandom:" + seuRandom + " oponenteRandom:" + oponenteRandom + "<<<");
+				
+				SharedPreferences pecas = c.getSharedPreferences("pecas", Context.MODE_PRIVATE);
+				
+				ByteArrayOutputStream enviar = new ByteArrayOutputStream();
+				enviar.write(pecas.getInt("esquerda", 1));
+				enviar.write(pecas.getInt("meio", 1));
+				enviar.write(pecas.getInt("direita", 1));
+				partidaThread.write(enviar.toByteArray());
+
+				etapa++;
+				
+				if (DEBUG) Log.v(TAG, ">>> etapa 0 terminada <<<");
+			} else if (etapa == 1) {
+				
+				if (DEBUG) Log.v(TAG, ">>> etapa 1 comecou <<<");
+				
+				byte[] objeto = (byte[])msg.obj;
+				
+				SharedPreferences pecas = c.getSharedPreferences("pecas", Context.MODE_PRIVATE);
+				
+				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
+										pecas.getInt("meio", 1),
+										pecas.getInt("direita", 1),
+										-objeto[0],
+										-objeto[1],
+										-objeto[2]);
+				
+				carregarMapa();
+				etapa++;
+				
+				if (DEBUG) Log.v(TAG, ">>> etapa 1 terminada <<<");
+			} else if (etapa == 2) {
+				
+				if (DEBUG) Log.v(TAG, ">>> etapa 2 comecou <<<");
+				
+				byte[] objeto = (byte[])msg.obj;
+				tabuleiro.receberDeBytes(objeto);
+				
+				carregarMapa();
+				
+				if (DEBUG) Log.v(TAG, ">>> etapa 2 terminada <<<");
+			}
+		};
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +158,34 @@ public class JogoActivity extends Activity {
 				
 				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
 										pecas.getInt("meio", 1),
-										pecas.getInt("direita", 1));
+										pecas.getInt("direita", 1),
+										-pecas.getInt("esquerda2", 1),
+										-pecas.getInt("meio2", 1),
+										-pecas.getInt("direita2", 1));
 				
 			} else {
+				
+				if (DEBUG) Log.v(TAG, ">>> Partida por Bluetooth <<<");
 				
 				// ISSO É TEMPORARIO ENQUANTO N TEM COMO DECIDIR QUEM COMEÇAR
 				seuTurno = false;
 				
-				// TODO Caso o jogo seja online como deve ser tratado?
+				socket = BluetoothGame.getBTSocket();
+				partidaThread = new ConexaoThread(socket);
+				partidaThread.start();
+				
+				numeroRandom = new Random();
+				seuRandom = numeroRandom.nextInt(200);
+				ByteArrayOutputStream enviar = new ByteArrayOutputStream();
+				enviar.write(seuRandom);
+				partidaThread.write(enviar.toByteArray());
 
-				tabuleiro = new Mapa(pecas.getInt("esquerda", 1),
-										pecas.getInt("meio", 1),
-										pecas.getInt("direita", 1),
-										-1,
-										-1,
-										-1);
+				tabuleiro = new Mapa(0,
+										0,
+										0,
+										0,
+										0,
+										0);
 			}
 		}
 		
@@ -464,8 +564,8 @@ public class JogoActivity extends Activity {
 			tocarSom();
 		
 		if (jogoOnline == true) {
-			// TODO Caso seja online como tratar?
-			carregarMapa();
+			partidaThread.write(tabuleiro.converterParaBytes());
+			seuTurno=false;
 		} else {
 			tabuleiro.inverter();
 			carregarMapa();
@@ -2544,6 +2644,74 @@ public class JogoActivity extends Activity {
 			Mover();
 			
 			pecaSelecionada=false;
+		}
+		
+	}
+	
+	private class ConexaoThread extends Thread {
+		private final BluetoothSocket mmSocket;
+		private final InputStream mmInStream;
+		private final OutputStream mmOutStream;
+		
+		public ConexaoThread(BluetoothSocket socket) {
+			
+			if (DEBUG) Log.v(TAG, ">>> conexaoThread <<<");
+			
+			mmSocket = socket;
+			InputStream tmpIn = null;
+			OutputStream tmpOut = null;
+			
+			try {
+				tmpIn = socket.getInputStream();
+				tmpOut = socket.getOutputStream();
+			} catch (IOException e) { }
+			
+			mmInStream = tmpIn;
+			mmOutStream = tmpOut;
+		}
+		
+		public void run() {
+			
+			if (DEBUG) Log.v(TAG, ">>> run/read <<<");
+			
+			byte[] buffer = new byte[1024]; // buffer para guardar informações da stream
+			int bytes; // qtos bytes foram utilizados
+			
+			// Continuar lendo da inputstream
+			while(true) {
+				try {
+					// Ler da InputStream
+					bytes = mmInStream.read(buffer);
+					// Ao receber coisa chamar o handler
+					mHandler.obtainMessage(0, bytes, -1, buffer).sendToTarget();
+				} catch(IOException e) {
+					if (DEBUG) Log.v(TAG, ">>> Uma execeção ocorreu durante a leitura de dados <<<");
+					cancel();
+					break;
+				}
+			}
+		}
+		
+		// Chamar para escrever dados
+		public void write(byte[] bytes) {
+			
+			if (DEBUG) Log.v(TAG, ">>> write <<<");
+			
+			try {
+				mmOutStream.write(bytes);
+			} catch (IOException e) {
+				if (DEBUG) Log.v(TAG, ">>> Erro na hora de escrever no buffer <<<");
+			}
+		}
+		
+		// Chamar quando for desligar conexao
+		public void cancel() {
+			
+			if (DEBUG) Log.v(TAG, ">>> cancel Thread <<<");
+			
+			try {
+				mmSocket.close();
+			} catch (IOException e) { }
 		}
 		
 	}

@@ -20,6 +20,7 @@
     <string name="title_activity_pecas">Peças</string>
     <string name="escolha_seus_guerreiros">Escolha seus guerreiros!</string>
     <string name="salvar_pecas">Salvar peças</string>
+    <string name="mudar_jogador">Mudar jogador</string>
     <string name="nome_soldado">Soldado</string>
     <string name="nome_mago">Mago</string>
     <string name="nome_rei">Rei</string>
@@ -28,6 +29,8 @@
     <string name="radio_meio">Meio</string>
     <string name="radio_direita">Direita</string>
     <string name="pecas_salvas">Peças salvas</string>
+    <string name="jogador1">Jogador 1</string>
+    <string name="jogador2">Jogador 2</string>
 
     <!-- Activity Jogo -->
     <string name="title_activity_jogo">Jogo</string>
