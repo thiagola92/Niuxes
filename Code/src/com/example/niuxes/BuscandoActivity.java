@@ -1,6 +1,7 @@
 package com.example.niuxes;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -85,7 +86,7 @@ public class BuscandoActivity extends Activity {
 			btBusca();
 		}
 		
-		if (DEBUG) Log.v(TAG, ">>> Aparelho visivel para outros por 300s <<<");
+		if (DEBUG) Log.v(TAG, ">>> Aparelho visivel para outros por" + TEMPO_DESCOBERTO + "s <<<");
 		
 		// Permitir que sejá descoberto por outros aplicativos
 		Intent serDescoberto = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
@@ -280,6 +281,13 @@ public class BuscandoActivity extends Activity {
 				aparelho = listaDeAparelhos.get(indice);
 				indice ++;
 				
+				if (DEBUG) Log.v(TAG, ">>> " + aparelho.getName() + "|||" + aparelho.getAddress() + "<<<");
+				
+				// tentativa de parear
+				if (aparelho.getBondState() != BluetoothDevice.BOND_BONDED) {
+					pairAparelho(aparelho);
+				}
+				
 				// Usar um serverSocket temporario já que o outro é final
 				BluetoothSocket tmp = null;
 				mmDevice = aparelho;
@@ -338,6 +346,19 @@ public class BuscandoActivity extends Activity {
 			} catch (IOException e) { }
 		}
 		
+	}
+	
+	// Tentativa de parear
+	public void pairAparelho(BluetoothDevice device) {
+		
+		if (DEBUG) Log.v(TAG, ">>> Tentativa de parear aparelhos <<<");
+		
+		try {
+			Method method = device.getClass().getMethod("createBond", (Class[]) null);
+			method.invoke(device, (Object[]) null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void comecarJogo(BluetoothSocket socket) {
